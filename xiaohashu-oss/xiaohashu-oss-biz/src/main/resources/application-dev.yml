@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: dev
+  config:
+    import:
+      - nacos:xiaohashu-oss-dev.yaml?group=xiaohashu-oss # 指定dataId和group
+  application:
+    name: xiaohashu-oss

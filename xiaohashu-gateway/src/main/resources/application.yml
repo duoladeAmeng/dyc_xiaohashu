@@ -1,0 +1,16 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: xiaohashu-gateway
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: auth
+          uri: lb://xiaohashu-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1

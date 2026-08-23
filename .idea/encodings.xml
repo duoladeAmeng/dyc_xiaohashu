@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/testmo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/testmo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/xiaoha-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/xiaoha-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/xiaoha-spring-boot-starter-biz-operationlog/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/xiaoha-spring-boot-starter-biz-operationlog/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/xiaoha-spring-boot-starter-jackson/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoha-framework/xiaoha-spring-boot-starter-jackson/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-oss/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-oss/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-oss/xiaohashu-oss-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-oss/xiaohashu-oss-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-oss/xiaohashu-oss-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-oss/xiaohashu-oss-biz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-user/xiaohashu-user-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-user/xiaohashu-user-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-user/xiaohashu-user-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-user/xiaohashu-user-biz/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

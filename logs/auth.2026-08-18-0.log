@@ -1,0 +1,9 @@
+2026-08-18 13:24:18.526 [main] INFO  com.dyc.xiaohashu.oss.XiaohashuOssBizApplication - Starting XiaohashuOssBizApplication using Java 17.0.12 with PID 14520 (E:\CodeDir\xiaohashu\xiaohashu-oss\xiaohashu-oss-biz\target\classes started by DYC in E:\CodeDir\xiaohashu)
+2026-08-18 13:24:18.527 [main] INFO  com.dyc.xiaohashu.oss.XiaohashuOssBizApplication - The following 1 profile is active: "dev"
+2026-08-18 13:24:18.992 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2026-08-18 13:24:19.001 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-18 13:24:19.001 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2026-08-18 13:24:19.057 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-18 13:24:19.058 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 509 ms
+2026-08-18 13:24:19.266 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2026-08-18 13:24:19.272 [main] INFO  com.dyc.xiaohashu.oss.XiaohashuOssBizApplication - Started XiaohashuOssBizApplication in 1.071 seconds (process running for 1.451)

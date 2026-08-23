@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: jackson-starter-test
+
+# Jackson 配置（可选）
+xiaoha:
+  jackson:
+    date-time-pattern: yyyy-MM-dd HH:mm:ss
+    date-pattern: yyyy-MM-dd
+    time-pattern: HH:mm:ss

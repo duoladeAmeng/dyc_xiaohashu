@@ -1,0 +1,13 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev # 默认激活 dev 本地开发环境
+  application:
+    name: xiaohashu-auth
+  cloud:
+    nacos:
+          config:
+            import-check:
+              enabled: false

@@ -1,0 +1,88 @@
+2026-08-16 17:46:39.779 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Starting XiaohashuAuthApplication using Java 17.0.12 with PID 36072 (E:\CodeDir\xiaohashu\xiaohashu-auth\target\classes started by DYC in E:\CodeDir\xiaohashu)
+2026-08-16 17:46:39.780 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - The following 1 profile is active: "dev"
+2026-08-16 17:46:40.383 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2026-08-16 17:46:40.390 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-16 17:46:40.390 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2026-08-16 17:46:40.436 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-16 17:46:40.437 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 630 ms
+2026-08-16 17:46:40.629 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2026-08-16 17:46:40.789 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-08-16 17:46:40.944 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2026-08-16 17:46:40.949 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Started XiaohashuAuthApplication in 1.461 seconds (process running for 1.741)
+2026-08-16 17:46:45.812 [http-nio-8081-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-16 17:46:45.815 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-16 17:46:45.824 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2026-08-16 17:46:46.195 [http-nio-8081-exec-1] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"犬小哈","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 17:46:46.213 [http-nio-8081-exec-1] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 43ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"犬小哈","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:15:02.410 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2026-08-16 18:15:02.410 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2026-08-16 18:15:07.273 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Starting XiaohashuAuthApplication using Java 17.0.12 with PID 14792 (E:\CodeDir\xiaohashu\xiaohashu-auth\target\classes started by DYC in E:\CodeDir\xiaohashu)
+2026-08-16 18:15:07.274 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - The following 1 profile is active: "dev"
+2026-08-16 18:15:07.862 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2026-08-16 18:15:07.870 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-16 18:15:07.870 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2026-08-16 18:15:07.909 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-16 18:15:07.910 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 610 ms
+2026-08-16 18:15:08.107 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2026-08-16 18:15:08.252 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-08-16 18:15:08.410 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2026-08-16 18:15:08.416 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Started XiaohashuAuthApplication in 1.446 seconds (process running for 1.716)
+2026-08-16 18:15:15.467 [http-nio-8081-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-16 18:15:15.469 [http-nio-8081-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-16 18:15:15.475 [http-nio-8081-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-08-16 18:15:15.904 [http-nio-8081-exec-2] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"犬小哈","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:15:15.919 [http-nio-8081-exec-2] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 49ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"犬小哈","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:15:21.956 [http-nio-8081-exec-3] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:15:21.957 [http-nio-8081-exec-3] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 1ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:15:37.683 [http-nio-8081-exec-10] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":null,"createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:15:37.686 [http-nio-8081-exec-10] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 4ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":null,"createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:15:48.239 [http-nio-8081-exec-4] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:15:48.243 [http-nio-8081-exec-4] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 4ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:16:05.168 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2026-08-16 18:16:05.173 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2026-08-16 18:16:08.124 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Starting XiaohashuAuthApplication using Java 17.0.12 with PID 26564 (E:\CodeDir\xiaohashu\xiaohashu-auth\target\classes started by DYC in E:\CodeDir\xiaohashu)
+2026-08-16 18:16:08.126 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - The following 1 profile is active: "dev"
+2026-08-16 18:16:08.713 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2026-08-16 18:16:08.719 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-16 18:16:08.719 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2026-08-16 18:16:08.764 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-16 18:16:08.765 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 614 ms
+2026-08-16 18:16:08.972 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2026-08-16 18:16:09.120 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-08-16 18:16:09.286 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2026-08-16 18:16:09.291 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Started XiaohashuAuthApplication in 1.446 seconds (process running for 1.708)
+2026-08-16 18:16:13.290 [http-nio-8081-exec-3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-16 18:16:13.291 [http-nio-8081-exec-3] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-16 18:16:13.296 [http-nio-8081-exec-3] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-08-16 18:16:13.652 [http-nio-8081-exec-3] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:16:13.665 [http-nio-8081-exec-3] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 46ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:16:14.783 [http-nio-8081-exec-2] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:16:14.785 [http-nio-8081-exec-2] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 3ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:16:15.544 [http-nio-8081-exec-4] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:16:15.546 [http-nio-8081-exec-4] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 2ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:16:15.812 [http-nio-8081-exec-5] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:16:15.815 [http-nio-8081-exec-5] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 2ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:16:16.293 [http-nio-8081-exec-6] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:16:16.295 [http-nio-8081-exec-6] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 2ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:16:16.664 [http-nio-8081-exec-7] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求开始: [测试接口3], 入参: {"nickName":"","createTime":"2024-05-14 12:00:00"}, 请求类: TestController, 请求方法: test3 =================================== 
+2026-08-16 18:16:16.666 [http-nio-8081-exec-7] INFO  c.d.f.b.operationlog.aspect.ApiOperationLogAspect - ====== 请求结束: [测试接口3], 耗时: 5ms, 出参: {"success":true,"message":null,"errorCode":null,"data":{"nickName":"","createTime":"2024-05-14 12:00:00"}} =================================== 
+2026-08-16 18:16:57.850 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2026-08-16 18:16:57.854 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2026-08-16 18:17:00.759 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Starting XiaohashuAuthApplication using Java 17.0.12 with PID 22684 (E:\CodeDir\xiaohashu\xiaohashu-auth\target\classes started by DYC in E:\CodeDir\xiaohashu)
+2026-08-16 18:17:00.761 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - The following 1 profile is active: "dev"
+2026-08-16 18:17:01.338 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2026-08-16 18:17:01.343 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-16 18:17:01.343 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2026-08-16 18:17:01.380 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-16 18:17:01.380 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 592 ms
+2026-08-16 18:17:01.576 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2026-08-16 18:17:01.713 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-08-16 18:17:01.880 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2026-08-16 18:17:01.885 [main] INFO  com.dyc.xiaohashu.auth.XiaohashuAuthApplication - Started XiaohashuAuthApplication in 1.416 seconds (process running for 1.678)
+2026-08-16 18:17:05.198 [http-nio-8081-exec-4] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-16 18:17:05.201 [http-nio-8081-exec-4] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-16 18:17:05.204 [http-nio-8081-exec-4] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-08-16 18:17:05.684 [http-nio-8081-exec-4] WARN  c.d.x.auth.exception.GlobalExceptionHandler - /test/test3 request error, errorCode: AUTH-10001, errorMessage: nickName ssssssss, 当前值: ''; 
+2026-08-16 18:17:07.059 [http-nio-8081-exec-6] WARN  c.d.x.auth.exception.GlobalExceptionHandler - /test/test3 request error, errorCode: AUTH-10001, errorMessage: nickName ssssssss, 当前值: ''; 
+2026-08-16 20:40:58.779 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2026-08-16 20:40:58.781 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

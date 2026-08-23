@@ -1,0 +1,11 @@
+# Jackson 日期格式化配置示例
+# 将此配置添加到你的 application.yml 或 application.properties 文件中
+
+xiaoha:
+  jackson:
+    # 日期时间格式（默认：yyyy-MM-dd HH:mm:ss）
+    date-time-pattern: yyyy-MM-dd HH:mm:ss
+    # 日期格式（默认：yyyy-MM-dd）
+    date-pattern: yyyy-MM-dd
+    # 时间格式（默认：HH:mm:ss）
+    time-pattern: HH:mm:ss
