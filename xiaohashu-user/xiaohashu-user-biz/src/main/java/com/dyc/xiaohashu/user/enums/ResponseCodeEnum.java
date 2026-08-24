@@ -1,6 +1,6 @@
 package com.dyc.xiaohashu.user.enums;
 
-import com.quanxiaoha.framework.common.exception.BaseExceptionInterface;
+import com.dyc.framework.common.exception.BaseExceptionInterface;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -26,6 +26,7 @@ public enum ResponseCodeEnum implements BaseExceptionInterface {
     UPLOAD_AVATAR_FAIL("USER-20005", "头像上传失败"),
     UPLOAD_BACKGROUND_IMG_FAIL("USER-20006", "背景图上传失败"),
     USER_NOT_FOUND("USER-20007", "该用户不存在"),
+    CURRENT_USER_NOT_FOUND("USER-20008", "当前登录用户不存在"),
     ;
 
     // 异常码

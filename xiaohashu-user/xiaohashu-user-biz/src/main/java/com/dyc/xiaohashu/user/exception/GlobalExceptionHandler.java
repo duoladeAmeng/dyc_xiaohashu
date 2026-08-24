@@ -1,8 +1,8 @@
 package com.dyc.xiaohashu.user.exception;
 
-import com.quanxiaoha.framework.common.exception.BizException;
-import com.quanxiaoha.framework.common.response.Response;
-import com.quanxiaoha.xiaohashu.user.biz.enums.ResponseCodeEnum;
+import com.dyc.framework.common.exception.BizException;
+import com.dyc.framework.common.response.Response;
+import com.dyc.xiaohashu.user.enums.ResponseCodeEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
