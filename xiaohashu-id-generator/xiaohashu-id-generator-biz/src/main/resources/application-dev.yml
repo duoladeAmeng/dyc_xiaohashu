@@ -1,53 +1,46 @@
 spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/xiaohashu?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-    username: root
-    password: 1234
-    type: com.alibaba.druid.pool.DruidDataSource
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
   application:
     name: xiaohashu-distributed-id-generator
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/xiaohashu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
 
 server:
   port: 8085
 
 distributed-id:
   namespace: xiaohashu
+  stable-instance: false
   jdbc:
     initialize-schema: true
+    retry-attempts: 3
+    initial-backoff: 20ms
+    max-backoff: 500ms
   snowflake:
     enabled: true
     epoch: 2025-01-01T00:00:00Z
-  machine:
-    allocator: jdbc
-    stable: false
+    timestamp-bit: 41
+    machine-bit: 10
+    sequence-bit: 12
     heartbeat-interval: 10s
-    lease-timeout: 30s
-    max-heartbeat-failures: 2
-    shutdown-timeout: 5s
+    safe-guard-duration: 30s
+    clock-spin-threshold: 1
+    clock-broken-threshold: 500
   segment:
     enabled: true
-    tag: default
-    default-step: 10000
+    name: segment
+    step: 10000
+    ttl-seconds: 9223372036854775807
   segment-chain:
     enabled: true
-    tag: default-chain
-    default-step: 10000
+    name: segment-chain
+    step: 10000
+    ttl-seconds: 9223372036854775807
     safe-distance: 2
-    max-prefetch-distance: 1024
     prefetch-period: 1s
-    prefetch-retry-count: 3
-    prefetch-retry-backoff: 50ms
-    scheduler-pool-size: 4
-    shutdown-timeout: 5s
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,metrics
-  endpoint:
-    health:
-      show-details: when_authorized
+    worker-core-pool-size: 4

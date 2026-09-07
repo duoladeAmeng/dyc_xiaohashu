@@ -13,10 +13,6 @@
     <name>xiaohashu-id-generator</name>
     <modules>
         <module>xiaohashu-id-generator-api</module>
-        <module>xiaohashu-id-generator-core</module>
-        <module>xiaohashu-id-generator-jdbc</module>
-        <module>xiaohashu-id-generator-spring-boot-starter</module>
-        <module>xiaohashu-id-generator-benchmark</module>
         <module>xiaohashu-id-generator-biz</module>
     </modules>
 

@@ -1,3 +1,0 @@
-com.dyc.xiaohashu.id.generator.spring.boot.autoconfigure.DistributedIdAutoConfiguration
-com.dyc.xiaohashu.id.generator.spring.boot.autoconfigure.DistributedIdMetricsAutoConfiguration
-com.dyc.xiaohashu.id.generator.spring.boot.autoconfigure.DistributedIdHealthAutoConfiguration
