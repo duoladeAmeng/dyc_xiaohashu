@@ -2,7 +2,7 @@ package com.dyc.xiaohashu.auth.controller;
 
 import com.dyc.framework.biz.operationlog.aspect.ApiOperationLog;
 import com.dyc.framework.common.response.Response;
-import com.dyc.xiaohashu.auth.dto.SendCodeReq;
+import com.dyc.xiaohashu.auth.dto.req.SendCodeReq;
 import com.dyc.xiaohashu.auth.service.VerificationCodeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

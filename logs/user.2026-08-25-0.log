@@ -1,0 +1,136 @@
+2026-08-25 17:20:27.211 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-25 17:20:27.291 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-25 17:20:27.301 [main] INFO  c.dyc.xiaohashu.user.XiaohashuUserBizApplication - Starting XiaohashuUserBizApplication using Java 17.0.12 with PID 19684 (E:\CodeDir\xiaohashu\xiaohashu-user\xiaohashu-user-biz\target\classes started by DYC in E:\CodeDir\xiaohashu)
+2026-08-25 17:20:27.302 [main] INFO  c.dyc.xiaohashu.user.XiaohashuUserBizApplication - The following 1 profile is active: "dev"
+2026-08-25 17:20:27.814 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-08-25 17:20:27.816 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-08-25 17:20:27.832 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2026-08-25 17:20:27.955 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=3e207388-fbfc-381c-998c-a7c26d7c7622
+2026-08-25 17:20:27.981 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.dyc.xiaohashu.oss.api.FileFeignApi' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-08-25 17:20:28.202 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8082 (http)
+2026-08-25 17:20:28.209 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-08-25 17:20:28.209 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2026-08-25 17:20:28.279 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-08-25 17:20:28.280 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 937 ms
+2026-08-25 17:20:28.350 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2026-08-25 17:20:28.587 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2026-08-25 17:20:28.926 [main] INFO  o.s.cloud.openfeign.FeignClientFactoryBean - For 'xiaohashu-oss' URL not provided. Will try picking an instance via load-balancing.
+2026-08-25 17:20:29.649 [main] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-08-25 17:20:29.697 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8082 (http) with context path ''
+2026-08-25 17:20:29.701 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-25 17:20:29.701 [main] INFO  com.alibaba.nacos.client.naming - initializer namespace from ans.namespace attribute : null
+2026-08-25 17:20:29.701 [main] INFO  com.alibaba.nacos.client.naming - initializer namespace from ALIBABA_ALIWARE_NAMESPACE attribute :null
+2026-08-25 17:20:29.702 [main] INFO  com.alibaba.nacos.client.naming - initializer namespace from namespace attribute :null
+2026-08-25 17:20:29.719 [main] INFO  com.alibaba.nacos.client.utils.ParamUtil - [settings] [req-serv] nacos-server port:8848
+2026-08-25 17:20:29.719 [main] INFO  com.alibaba.nacos.client.utils.ParamUtil - [settings] [http-client] connect timeout:1000
+2026-08-25 17:20:29.720 [main] INFO  com.alibaba.nacos.client.utils.ParamUtil - PER_TASK_CONFIG_SIZE: 3000.0
+2026-08-25 17:20:29.723 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2026-08-25 17:20:29.723 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2026-08-25 17:20:29.724 [main] INFO  c.a.n.client.auth.ram.identify.CredentialWatcher - null No credential found
+2026-08-25 17:20:29.731 [main] INFO  com.alibaba.nacos.common.remote.client - [RpcClientFactory] create a new rpc client of 26385aef-bc53-4fb9-a239-347657e5f124
+2026-08-25 17:20:29.744 [main] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] RpcClient init, ServerListFactory = com.alibaba.nacos.client.naming.core.ServerListManager
+2026-08-25 17:20:29.744 [main] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] Registry connection listener to current client:com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService
+2026-08-25 17:20:29.745 [main] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingPushRequestHandler
+2026-08-25 17:20:29.746 [main] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] Try to connect to server on start up, server: {serverIp = '127.0.0.1', server main port = 8848}
+2026-08-25 17:20:29.765 [main] INFO  c.a.nacos.common.remote.client.grpc.GrpcClient - grpc client connection server:127.0.0.1 ip,serverPort:9848,grpcTslConfig:{"sslProvider":"OPENSSL","enableTls":false,"mutualAuthEnable":false,"trustAll":false}
+2026-08-25 17:20:30.358 [main] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] Success to connect to server [127.0.0.1:8848] on start up, connectionId = 1787649630197_127.0.0.1_56106
+2026-08-25 17:20:30.358 [com.alibaba.nacos.client.remote.worker] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] Notify connected event to listeners.
+2026-08-25 17:20:30.358 [com.alibaba.nacos.client.remote.worker] INFO  com.alibaba.nacos.client.naming - Grpc connection connect
+2026-08-25 17:20:30.358 [main] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2026-08-25 17:20:30.358 [main] INFO  com.alibaba.nacos.common.remote.client - [26385aef-bc53-4fb9-a239-347657e5f124] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda$1233/0x0000019c60880440
+2026-08-25 17:20:30.358 [main] INFO  com.alibaba.nacos.client.naming - [REGISTER-SERVICE] public registering service xiaohashu-user with instance Instance{instanceId='null', ip='172.31.111.1', port=8082, weight=1.0, healthy=true, enabled=true, ephemeral=true, clusterName='DEFAULT', serviceName='null', metadata={IPv6=[240c:c981:3000:0:86ee:d472:e60d:74fc], preserved.register.source=SPRING_CLOUD}}
+2026-08-25 17:20:30.374 [main] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - nacos registry, DEFAULT_GROUP xiaohashu-user 172.31.111.1:8082 register finished
+2026-08-25 17:20:30.441 [main] INFO  c.dyc.xiaohashu.user.XiaohashuUserBizApplication - Started XiaohashuUserBizApplication in 3.654 seconds (process running for 4.056)
+2026-08-25 17:20:30.766 [main] DEBUG c.d.x.u.d.mapper.RoleDOMapper.selectEnabledList - ==>  Preparing: select id, role_key, role_name from t_role where `status` = 0 and is_deleted = 0
+2026-08-25 17:20:30.910 [main] DEBUG c.d.x.u.d.mapper.RoleDOMapper.selectEnabledList - ==> Parameters: 
+2026-08-25 17:20:30.995 [main] DEBUG c.d.x.u.d.mapper.RoleDOMapper.selectEnabledList - <==      Total: 1
+2026-08-25 17:20:31.010 [main] DEBUG c.d.x.u.d.m.RolePermissionDOMapper.selectByRoleIds - ==>  Preparing: select role_id, permission_id from t_role_permission_rel where role_id in ( ? )
+2026-08-25 17:20:31.011 [main] DEBUG c.d.x.u.d.m.RolePermissionDOMapper.selectByRoleIds - ==> Parameters: 1(Long)
+2026-08-25 17:20:31.021 [main] DEBUG c.d.x.u.d.m.RolePermissionDOMapper.selectByRoleIds - <==      Total: 2
+2026-08-25 17:20:31.022 [main] DEBUG c.d.x.u.d.m.P.selectAppEnabledList - ==>  Preparing: select id, `name`, permission_key from t_permission where `status` = 0 and `type` = 3 and is_deleted = 0
+2026-08-25 17:20:31.023 [main] DEBUG c.d.x.u.d.m.P.selectAppEnabledList - ==> Parameters: 
+2026-08-25 17:20:31.030 [main] DEBUG c.d.x.u.d.m.P.selectAppEnabledList - <==      Total: 3
+2026-08-25 17:32:46.451 [http-nio-8082-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-25 17:32:46.453 [http-nio-8082-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-08-25 17:32:46.456 [http-nio-8082-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-08-25 17:32:46.492 [http-nio-8082-exec-2] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 设置 userId 到 ThreadLocal 中， 用户 ID: 1787545330104002
+2026-08-25 17:32:46.494 [http-nio-8082-exec-1] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 设置 userId 到 ThreadLocal 中， 用户 ID: 1787545330104002
+2026-08-25 17:32:46.730 [http-nio-8082-exec-1] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==>  Preparing: select id, xiaohashu_id, `password`, nickname, avatar, birthday, background_img, phone, sex, `status`, introduction, create_time, update_time, is_deleted from t_user where id = ?
+2026-08-25 17:32:46.730 [http-nio-8082-exec-2] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==>  Preparing: select id, xiaohashu_id, `password`, nickname, avatar, birthday, background_img, phone, sex, `status`, introduction, create_time, update_time, is_deleted from t_user where id = ?
+2026-08-25 17:32:46.732 [http-nio-8082-exec-1] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:32:46.732 [http-nio-8082-exec-2] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:32:46.763 [http-nio-8082-exec-2] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - <==      Total: 1
+2026-08-25 17:32:46.763 [http-nio-8082-exec-1] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - <==      Total: 1
+2026-08-25 17:32:46.768 [http-nio-8082-exec-2] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==>  Preparing: select id, user_id, fans_total, following_total, note_total, like_total, collect_total from t_user_count where user_id = ? limit 1
+2026-08-25 17:32:46.768 [http-nio-8082-exec-1] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==>  Preparing: select id, user_id, fans_total, following_total, note_total, like_total, collect_total from t_user_count where user_id = ? limit 1
+2026-08-25 17:32:46.773 [http-nio-8082-exec-2] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:32:46.773 [http-nio-8082-exec-1] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:32:46.788 [http-nio-8082-exec-1] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - <==      Total: 1
+2026-08-25 17:32:46.789 [http-nio-8082-exec-2] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - <==      Total: 1
+2026-08-25 17:32:46.848 [http-nio-8082-exec-2] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 删除 ThreadLocal， userId: 1787545330104002
+2026-08-25 17:32:46.848 [http-nio-8082-exec-1] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 删除 ThreadLocal， userId: 1787545330104002
+2026-08-25 17:53:58.488 [http-nio-8082-exec-5] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 设置 userId 到 ThreadLocal 中， 用户 ID: 1787545330104002
+2026-08-25 17:53:58.508 [http-nio-8082-exec-5] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==>  Preparing: select id, xiaohashu_id, `password`, nickname, avatar, birthday, background_img, phone, sex, `status`, introduction, create_time, update_time, is_deleted from t_user where id = ?
+2026-08-25 17:53:58.510 [http-nio-8082-exec-5] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:53:58.510 [http-nio-8082-exec-6] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 设置 userId 到 ThreadLocal 中， 用户 ID: 1787545330104002
+2026-08-25 17:53:58.512 [http-nio-8082-exec-5] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - <==      Total: 1
+2026-08-25 17:53:58.514 [http-nio-8082-exec-6] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==>  Preparing: select id, xiaohashu_id, `password`, nickname, avatar, birthday, background_img, phone, sex, `status`, introduction, create_time, update_time, is_deleted from t_user where id = ?
+2026-08-25 17:53:58.516 [http-nio-8082-exec-6] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:53:58.518 [http-nio-8082-exec-6] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - <==      Total: 1
+2026-08-25 17:53:58.520 [http-nio-8082-exec-5] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==>  Preparing: select id, user_id, fans_total, following_total, note_total, like_total, collect_total from t_user_count where user_id = ? limit 1
+2026-08-25 17:53:58.521 [http-nio-8082-exec-5] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:53:58.521 [http-nio-8082-exec-6] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==>  Preparing: select id, user_id, fans_total, following_total, note_total, like_total, collect_total from t_user_count where user_id = ? limit 1
+2026-08-25 17:53:58.523 [http-nio-8082-exec-6] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==> Parameters: 1787545330104002(Long)
+2026-08-25 17:53:58.524 [http-nio-8082-exec-5] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - <==      Total: 1
+2026-08-25 17:53:58.526 [http-nio-8082-exec-6] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - <==      Total: 1
+2026-08-25 17:53:58.528 [http-nio-8082-exec-6] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 删除 ThreadLocal， userId: 1787545330104002
+2026-08-25 17:53:58.527 [http-nio-8082-exec-5] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 删除 ThreadLocal， userId: 1787545330104002
+2026-08-25 18:01:10.244 [http-nio-8082-exec-9] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 设置 userId 到 ThreadLocal 中， 用户 ID: 1787545330104002
+2026-08-25 18:01:10.244 [http-nio-8082-exec-10] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 设置 userId 到 ThreadLocal 中， 用户 ID: 1787545330104002
+2026-08-25 18:01:10.248 [http-nio-8082-exec-9] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==>  Preparing: select id, xiaohashu_id, `password`, nickname, avatar, birthday, background_img, phone, sex, `status`, introduction, create_time, update_time, is_deleted from t_user where id = ?
+2026-08-25 18:01:10.248 [http-nio-8082-exec-10] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==>  Preparing: select id, xiaohashu_id, `password`, nickname, avatar, birthday, background_img, phone, sex, `status`, introduction, create_time, update_time, is_deleted from t_user where id = ?
+2026-08-25 18:01:10.250 [http-nio-8082-exec-10] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==> Parameters: 1787545330104002(Long)
+2026-08-25 18:01:10.250 [http-nio-8082-exec-9] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - ==> Parameters: 1787545330104002(Long)
+2026-08-25 18:01:10.253 [http-nio-8082-exec-10] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - <==      Total: 1
+2026-08-25 18:01:10.255 [http-nio-8082-exec-9] DEBUG c.d.x.u.d.mapper.UserDOMapper.selectByPrimaryKey - <==      Total: 1
+2026-08-25 18:01:10.256 [http-nio-8082-exec-10] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==>  Preparing: select id, user_id, fans_total, following_total, note_total, like_total, collect_total from t_user_count where user_id = ? limit 1
+2026-08-25 18:01:10.256 [http-nio-8082-exec-9] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==>  Preparing: select id, user_id, fans_total, following_total, note_total, like_total, collect_total from t_user_count where user_id = ? limit 1
+2026-08-25 18:01:10.257 [http-nio-8082-exec-9] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==> Parameters: 1787545330104002(Long)
+2026-08-25 18:01:10.257 [http-nio-8082-exec-10] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - ==> Parameters: 1787545330104002(Long)
+2026-08-25 18:01:10.260 [http-nio-8082-exec-9] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - <==      Total: 1
+2026-08-25 18:01:10.260 [http-nio-8082-exec-10] DEBUG c.d.x.u.d.mapper.UserCountDOMapper.selectByUserId - <==      Total: 1
+2026-08-25 18:01:10.263 [http-nio-8082-exec-10] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 删除 ThreadLocal， userId: 1787545330104002
+2026-08-25 18:01:10.263 [http-nio-8082-exec-9] INFO  c.d.f.b.context.filter.HeaderUserId2ContextFilter - ===== 删除 ThreadLocal， userId: 1787545330104002
+2026-08-25 21:43:52.660 [Thread-5] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+2026-08-25 21:43:52.660 [Thread-8] WARN  c.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+2026-08-25 21:43:52.662 [Thread-5] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+2026-08-25 21:43:52.665 [Thread-8] WARN  c.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+2026-08-25 21:43:52.765 [SpringApplicationShutdownHook] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - De-registering from Nacos Server now...
+2026-08-25 21:43:52.766 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - [DEREGISTER-SERVICE] public deregistering service xiaohashu-user with instance: Instance{instanceId='null', ip='172.31.111.1', port=8082, weight=1.0, healthy=true, enabled=true, ephemeral=true, clusterName='DEFAULT', serviceName='null', metadata={}}
+2026-08-25 21:43:52.778 [SpringApplicationShutdownHook] INFO  c.a.cloud.nacos.registry.NacosServiceRegistry - De-registration finished.
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.cache.ServiceInfoHolder do shutdown begin
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.backups.FailoverReactor do shutdown begin
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.backups.FailoverReactor do shutdown stop
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.cache.ServiceInfoHolder do shutdown stop
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate do shutdown begin
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServiceInfoUpdateService do shutdown begin
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServiceInfoUpdateService do shutdown stop
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServerListManager do shutdown begin
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Start destroying NacosRestTemplate
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Destruction of the end
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServerListManager do shutdown stop
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy do shutdown begin
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Start destroying NacosRestTemplate
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Destruction of the end
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy do shutdown stop
+2026-08-25 21:43:52.780 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.common.remote.client - Shutdown rpc client, set status to shutdown
+2026-08-25 21:43:52.781 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.common.remote.client - Shutdown client event executor java.util.concurrent.ScheduledThreadPoolExecutor@3f1fcf33[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]
+2026-08-25 21:43:52.781 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.common.remote.client - Close current connection 1787649630197_127.0.0.1_56106
+2026-08-25 21:43:52.783 [nacos-grpc-client-executor-127.0.0.1-3173] INFO  c.a.nacos.common.remote.client.grpc.GrpcClient - [1787649630197_127.0.0.1_56106]Ignore complete event,isRunning:false,isAbandon=false
+2026-08-25 21:43:52.790 [SpringApplicationShutdownHook] INFO  c.a.nacos.common.remote.client.grpc.GrpcClient - Shutdown grpc executor java.util.concurrent.ThreadPoolExecutor@2e2ea0d3[Running, pool size = 5, active threads = 0, queued tasks = 0, completed tasks = 3174]
+2026-08-25 21:43:52.790 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - Shutdown grpc redo service executor java.util.concurrent.ScheduledThreadPoolExecutor@35063822[Running, pool size = 1, active threads = 0, queued tasks = 1, completed tasks = 5253]
+2026-08-25 21:43:52.790 [SpringApplicationShutdownHook] INFO  c.a.n.client.auth.ram.identify.CredentialWatcher - [null] CredentialWatcher is stopped
+2026-08-25 21:43:52.790 [SpringApplicationShutdownHook] INFO  c.a.n.client.auth.ram.identify.CredentialService - [null] CredentialService is freed
+2026-08-25 21:43:52.790 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate do shutdown stop
+2026-08-25 21:43:52.948 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2026-08-25 21:43:52.949 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

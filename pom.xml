@@ -25,8 +25,14 @@
     <module>xiaohashu-gateway</module>
     <module>xiaohashu-oss</module>
     <module>xiaohashu-user</module>
-
-
+    <module>xiaohashu-user-relation</module>
+    <module>xiaohashu-note</module>
+    <module>xiaohashu-kv</module>
+    <module>xiaohashu-comment</module>
+    <module>xiaohashu-count</module>
+    <module>xiaohashu-search</module>
+    <module>xiaohashu-data-align</module>
+      <module>xiaohashu-id-generator</module>
   </modules>
 <!--定义项目属性-->
   <properties>
@@ -68,7 +74,10 @@
     <sa-token.version>1.38.0</sa-token.version>
 
     <rocketmq.version>2.2.3</rocketmq.version>
-
+    <hutool.version>5.8.26</hutool.version>
+    <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
+    <caffeine.version>3.1.8</caffeine.version>
+    <knife4j.version>4.5.0</knife4j.version>
   </properties>
 
   <!-- 统一依赖管理 -->
@@ -115,6 +124,38 @@
         <artifactId>xiaoha-common</artifactId>
         <version>${revision}</version>
       </dependency>
+      <dependency>
+        <groupId>com.dyc.xiaohashu.user</groupId>
+        <artifactId>xiaohashu-user-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.dyc.xiaohashu.comment</groupId>
+        <artifactId>xiaohashu-comment-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.dyc.xiaohashu.count</groupId>
+        <artifactId>xiaohashu-count-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.dyc.xiaohashu.search</groupId>
+        <artifactId>xiaohashu-search-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.dyc</groupId>
+        <artifactId>xiaohashu-id-generator-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.dyc.xiaohashu.kv</groupId>
+        <artifactId>xiaohashu-kv-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
 
       <!-- Jackson -->
       <dependency>
@@ -133,6 +174,13 @@
       <dependency>
         <groupId>com.dyc</groupId>
         <artifactId>xiaoha-spring-boot-starter-biz-operationlog</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <!-- 上下文组件 -->
+      <dependency>
+        <groupId>com.dyc</groupId>
+        <artifactId>xiaoha-spring-boot-starter-biz-context</artifactId>
         <version>${revision}</version>
       </dependency>
 
@@ -161,13 +209,6 @@
       </dependency>
 
 
-      <dependency>
-        <groupId>com.dyc.framework.jackson</groupId>
-        <artifactId>xiaoha-spring-boot-starter-jackson</artifactId>
-        <version>${revision}</version>
-      </dependency>
-
-
 
           <!-- Sa-Token 权限认证 -->
           <dependency>
@@ -183,7 +224,11 @@
         <version>${sa-token.version}</version>
       </dependency>
 
-
+      <dependency>
+        <groupId>cn.dev33</groupId>
+        <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
+        <version>${sa-token.version}</version>
+      </dependency>
       <!-- 阿里云 OSS -->
       <dependency>
         <groupId>com.aliyun.oss</groupId>
@@ -195,6 +240,38 @@
         <groupId>org.apache.rocketmq</groupId>
         <artifactId>rocketmq-spring-boot-starter</artifactId>
         <version>${rocketmq.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>transmittable-thread-local</artifactId>
+        <version>${transmittable-thread-local.version}</version>
+      </dependency>
+      <!-- Caffeine 本地缓存 -->
+      <dependency>
+        <groupId>com.github.ben-manes.caffeine</groupId>
+        <artifactId>caffeine</artifactId>
+        <version>${caffeine.version}</version>
+      </dependency>
+
+      <!-- Knife4j 接口文档 -->
+      <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+        <version>${knife4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
+        <version>${knife4j.version}</version>
       </dependency>
 
     </dependencies>

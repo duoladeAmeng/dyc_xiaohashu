@@ -33,7 +33,7 @@
         </javaTypeResolver>
 
         <!-- DO 实体类存放路径 -->
-        <javaModelGenerator targetPackage="com.dyc.xiaohashu.user.biz.domain.dataobject"
+        <javaModelGenerator targetPackage="com.dyc.xiaohashu.user.domain.dataobject"
                             targetProject="src/main/java"/>
 
         <!-- Mapper xml 文件存放路径-->

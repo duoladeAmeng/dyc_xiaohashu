@@ -1,8 +1,8 @@
 package com.dyc.xiaohashu.auth.service;
 
 import com.dyc.framework.common.response.Response;
-import com.dyc.xiaohashu.auth.dto.UpdatePasswordReq;
-import com.dyc.xiaohashu.auth.dto.UserLoginReq;
+import com.dyc.xiaohashu.auth.dto.req.UpdatePasswordReq;
+import com.dyc.xiaohashu.auth.dto.req.UserLoginReq;
 
 public interface AuthService {
 

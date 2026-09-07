@@ -9,3 +9,12 @@ rocketmq:
   consumer:
     group: xiaohashu_group
     pull-batch-size: 5 # 每次拉取的最大消息数
+
+knife4j:
+  enable: true
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

@@ -326,7 +326,7 @@ feign.FeignException$ServiceUnavailable: [503] during [POST] to [http://xiaohash
 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
-	at com.quanxiaoha.framework.biz.context.filter.HeaderUserId2ContextFilter.doFilterInternal(HeaderUserId2ContextFilter.java:33)
+	at filter.com.dyc.framework.biz.context.HeaderUserId2ContextFilter.doFilterInternal(HeaderUserId2ContextFilter.java:33)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)

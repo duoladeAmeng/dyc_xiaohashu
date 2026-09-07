@@ -1,2 +1,2 @@
-com.quanxiaoha.framework.biz.context.config.ContextAutoConfiguration
-com.quanxiaoha.framework.biz.context.config.FeignContextAutoConfiguration
+config.com.dyc.framework.biz.context.ContextAutoConfiguration
+config.com.dyc.framework.biz.context.FeignContextAutoConfiguration

@@ -11,6 +11,8 @@ public interface UserCountDOMapper {
 
     UserCountDO selectByPrimaryKey(Long id);
 
+    UserCountDO selectByUserId(Long userId);
+
     int updateByPrimaryKeySelective(UserCountDO record);
 
     int updateByPrimaryKey(UserCountDO record);

@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.dyc</groupId>
+        <artifactId>xiaohashu</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>xiaohashu-id-generator</artifactId>
+    <packaging>pom</packaging>
+
+    <name>xiaohashu-id-generator</name>
+    <modules>
+        <module>xiaohashu-id-generator-api</module>
+        <module>xiaohashu-id-generator-core</module>
+        <module>xiaohashu-id-generator-jdbc</module>
+        <module>xiaohashu-id-generator-spring-boot-starter</module>
+        <module>xiaohashu-id-generator-benchmark</module>
+        <module>xiaohashu-id-generator-biz</module>
+    </modules>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+</project>

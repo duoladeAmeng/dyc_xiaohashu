@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/xiaohashu?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+  application:
+    name: xiaohashu-distributed-id-generator
+
+server:
+  port: 8085
+
+distributed-id:
+  namespace: xiaohashu
+  jdbc:
+    initialize-schema: true
+  snowflake:
+    enabled: true
+    epoch: 2025-01-01T00:00:00Z
+  machine:
+    allocator: jdbc
+    stable: false
+    heartbeat-interval: 10s
+    lease-timeout: 30s
+    max-heartbeat-failures: 2
+    shutdown-timeout: 5s
+  segment:
+    enabled: true
+    tag: default
+    default-step: 10000
+  segment-chain:
+    enabled: true
+    tag: default-chain
+    default-step: 10000
+    safe-distance: 2
+    max-prefetch-distance: 1024
+    prefetch-period: 1s
+    prefetch-retry-count: 3
+    prefetch-retry-backoff: 50ms
+    scheduler-pool-size: 4
+    shutdown-timeout: 5s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+  endpoint:
+    health:
+      show-details: when_authorized

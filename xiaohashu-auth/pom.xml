@@ -33,6 +33,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- Knife4j 接口文档 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+        </dependency>
 <!--测试依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -91,6 +96,13 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <!-- 密码加密 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <!-- satoken依赖-->
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot3-starter</artifactId>
@@ -99,6 +111,18 @@
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-redis-jackson</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.dyc.xiaohashu.user</groupId>
+            <artifactId>xiaohashu-user-api</artifactId>
+        </dependency>
+
+        <!-- 上下文组件 -->
+        <dependency>
+            <groupId>com.dyc</groupId>
+            <artifactId>xiaoha-spring-boot-starter-biz-context</artifactId>
+        </dependency>
+
 
 
     </dependencies>

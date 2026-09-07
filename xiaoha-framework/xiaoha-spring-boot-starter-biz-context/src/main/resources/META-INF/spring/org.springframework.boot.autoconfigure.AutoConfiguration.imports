@@ -1,0 +1,2 @@
+com.dyc.framework.biz.context.config.ContextAutoConfiguration
+com.dyc.framework.biz.context.config.FeignContextAutoConfiguration

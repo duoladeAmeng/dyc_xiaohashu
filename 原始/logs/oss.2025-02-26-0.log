@@ -98,7 +98,7 @@ java.lang.reflect.UndeclaredThrowableException: null
 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
-	at com.quanxiaoha.framework.biz.context.filter.HeaderUserId2ContextFilter.doFilterInternal(HeaderUserId2ContextFilter.java:41)
+	at filter.com.dyc.framework.biz.context.HeaderUserId2ContextFilter.doFilterInternal(HeaderUserId2ContextFilter.java:41)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)

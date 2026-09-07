@@ -1,0 +1,104 @@
+2026-08-24 23:19:31.199 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:19:31.287 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:19:31.302 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 31096 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:19:31.304 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:19:32.437 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:19:32.530 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 82 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:19:32.540 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:19:32.572 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 31 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:19:32.819 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:19:33.732 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:19:34.572 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:19:35.201 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:19:37.629 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 7.32 seconds (process running for 8.985)
+2026-08-24 23:21:19.139 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:21:19.201 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:21:19.221 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 31092 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:21:19.225 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:21:20.235 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:21:20.281 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:21:20.286 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:21:20.306 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:21:20.559 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:21:21.238 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:21:21.863 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:21:22.416 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:21:24.595 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 6.106 seconds (process running for 7.388)
+2026-08-24 23:21:40.421 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:21:40.493 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:21:40.517 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 17588 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:21:40.519 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:21:41.410 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:21:41.455 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:21:41.461 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:21:41.478 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:21:41.667 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:21:42.243 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:21:43.076 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:21:43.574 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:21:45.963 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 6.309 seconds (process running for 7.543)
+2026-08-24 23:22:01.939 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:22:02.002 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:22:02.019 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 19360 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:22:02.022 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:22:03.030 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:22:03.084 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:22:03.092 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:22:03.111 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:22:03.355 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:22:04.036 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:22:04.663 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:22:05.146 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:22:07.438 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 6.177 seconds (process running for 7.5)
+2026-08-24 23:22:36.452 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:22:36.518 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:22:36.535 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 29200 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:22:36.536 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:22:37.391 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:22:37.431 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:22:37.450 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:22:37.469 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:22:37.688 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:22:38.361 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:22:39.077 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:22:39.584 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:22:41.639 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 5.839 seconds (process running for 7.079)
+2026-08-24 23:22:50.592 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:22:50.657 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:22:50.670 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 432 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:22:50.672 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:22:51.453 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:22:51.500 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:22:51.508 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:22:51.527 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:22:51.774 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:22:52.593 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:22:53.431 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:22:54.045 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:22:56.201 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 6.259 seconds (process running for 7.571)
+2026-08-24 23:23:25.248 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:23:25.312 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:23:25.325 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 10036 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:23:25.328 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:23:26.154 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:23:26.203 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:23:26.210 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:23:26.231 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:23:26.453 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:23:27.105 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:23:27.874 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:23:28.401 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:23:30.590 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 6.027 seconds (process running for 7.429)
+2026-08-24 23:23:43.473 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:23:43.535 [main] WARN  com.alibaba.nacos.client.logging.NacosLogging - Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml
+2026-08-24 23:23:43.547 [main] INFO  com.dyc.xiaohashu.kv.Data - Starting Data using Java 17.0.12 with PID 6192 (started by DYC in E:\CodeDir\xiaohashu\xiaohashu-kv\xiaohashu-kv-biz)
+2026-08-24 23:23:43.548 [main] INFO  com.dyc.xiaohashu.kv.Data - The following 1 profile is active: "dev"
+2026-08-24 23:23:44.413 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-08-24 23:23:44.454 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-08-24 23:23:44.472 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-08-24 23:23:44.490 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 1 Cassandra repository interfaces.
+2026-08-24 23:23:44.704 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=63e5657f-3ef9-3c47-8dfe-58834602fa64
+2026-08-24 23:23:45.348 [main] INFO  c.d.o.driver.internal.core.DefaultMavenCoordinates - DataStax Java driver for Apache Cassandra(R) (com.datastax.oss:java-driver-core) version 4.15.0
+2026-08-24 23:23:46.063 [s0-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:23:46.699 [s1-admin-0] INFO  com.datastax.oss.driver.internal.core.time.Clock - Using native clock for microsecond precision
+2026-08-24 23:23:48.915 [main] INFO  com.dyc.xiaohashu.kv.Data - Started Data in 6.162 seconds (process running for 7.548)
