@@ -7,11 +7,13 @@ import java.time.Duration;
  */
 public interface MachineIdAllocator {
 
-    MachineState acquire(String namespace, int machineBit, InstanceId instanceId, Duration safeGuardDuration);
+    Duration FOREVER_SAFE_GUARD_DURATION = Duration.ofMillis(Long.MAX_VALUE);
 
-    void guard(String namespace, InstanceId instanceId, MachineState machineState, Duration safeGuardDuration);
+    MachineState distribute(String namespace, int machineBit, InstanceId instanceId, Duration safeGuardDuration);
 
-    void release(String namespace, InstanceId instanceId, MachineState machineState);
+    void revert(String namespace, InstanceId instanceId);
+
+    void guard(String namespace, InstanceId instanceId, Duration safeGuardDuration);
 
     static int maxMachineId(int machineBit) {
         if (machineBit <= 0 || machineBit >= Integer.SIZE) {
@@ -32,7 +34,13 @@ public interface MachineIdAllocator {
         if (stable) {
             return 0L;
         }
+        if (FOREVER_SAFE_GUARD_DURATION.equals(safeGuardDuration)) {
+            return 0L;
+        }
         long safeGuardAt = System.currentTimeMillis() - safeGuardDuration.toMillis();
-        return Math.max(safeGuardAt, 0L);
+        if (safeGuardAt < 0) {
+            return 0L;
+        }
+        return safeGuardAt;
     }
 }

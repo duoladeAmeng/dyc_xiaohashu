@@ -3,17 +3,16 @@ package com.dyc.xiaohashu.id.generator.core.machine;
 import java.util.Objects;
 
 /**
- * Copied and modified from CosId's InstanceId.
+ * Migrated from CosId's InstanceId.
  */
 public final class InstanceId {
+
+    public static final InstanceId NONE = new InstanceId("none", false);
 
     private final String instanceId;
     private final boolean stable;
 
     public InstanceId(String instanceId, boolean stable) {
-        if (instanceId == null || instanceId.isBlank()) {
-            throw new IllegalArgumentException("instanceId can not be empty.");
-        }
         this.instanceId = instanceId;
         this.stable = stable;
     }
@@ -28,6 +27,10 @@ public final class InstanceId {
 
     public static InstanceId of(String instanceId, boolean stable) {
         return new InstanceId(instanceId, stable);
+    }
+
+    public static InstanceId of(String host, int port, boolean stable) {
+        return of(String.format("%s:%s", host, port), stable);
     }
 
     @Override

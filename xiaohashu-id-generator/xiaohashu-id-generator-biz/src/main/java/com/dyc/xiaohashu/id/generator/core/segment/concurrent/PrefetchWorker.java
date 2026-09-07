@@ -1,7 +1,7 @@
 package com.dyc.xiaohashu.id.generator.core.segment.concurrent;
 
 /**
- * Copied and modified from CosId's PrefetchWorker.
+ * Migrated from CosId's PrefetchWorker.
  */
 public interface PrefetchWorker {
 

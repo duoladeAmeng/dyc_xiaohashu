@@ -1,13 +1,14 @@
 package com.dyc.xiaohashu.id.generator.core.machine;
 
 import com.dyc.xiaohashu.id.generator.core.snowflake.exception.ClockTooManyBackwardsException;
+import com.dyc.xiaohashu.id.generator.core.IdGeneratorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * Copied and modified from CosId's DefaultClockBackwardsSynchronizer.
+ * Migrated from CosId's DefaultClockBackwardsSynchronizer.
  */
 public class DefaultClockBackwardsSynchronizer implements ClockBackwardsSynchronizer {
 
@@ -35,13 +36,13 @@ public class DefaultClockBackwardsSynchronizer implements ClockBackwardsSynchron
 
     @Override
     public void sync(long lastTimestamp) throws InterruptedException, ClockTooManyBackwardsException {
-        long backwards = ClockBackwardsSynchronizer.getBackwardsTimestamp(lastTimestamp);
+        long backwards = ClockBackwardsSynchronizer.getBackwardsTimeStamp(lastTimestamp);
         if (backwards <= 0) {
             return;
         }
         log.warn("Detected clock backwards: {} ms, lastTimestamp: {}.", backwards, lastTimestamp);
         if (backwards <= spinThreshold) {
-            while (ClockBackwardsSynchronizer.getBackwardsTimestamp(lastTimestamp) > 0) {
+            while (ClockBackwardsSynchronizer.getBackwardsTimeStamp(lastTimestamp) > 0) {
                 Thread.onSpinWait();
             }
             return;
@@ -50,5 +51,16 @@ public class DefaultClockBackwardsSynchronizer implements ClockBackwardsSynchron
             throw new ClockTooManyBackwardsException(lastTimestamp, System.currentTimeMillis(), brokenThreshold);
         }
         TimeUnit.MILLISECONDS.sleep(backwards);
+    }
+
+    @Override
+    public void syncUninterruptibly(long lastTimestamp) throws ClockTooManyBackwardsException {
+        try {
+            sync(lastTimestamp);
+        } catch (InterruptedException e) {
+            log.error("Thread interrupted during sync - lastTimestamp:[{}]. Restoring interrupt status.", lastTimestamp, e);
+            Thread.currentThread().interrupt();
+            throw new IdGeneratorException(e);
+        }
     }
 }

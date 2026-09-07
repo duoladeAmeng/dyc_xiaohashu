@@ -1,9 +1,8 @@
 package com.dyc.xiaohashu.id.generator.core.segment;
 
-/**
- * Copied and modified from CosId's IdSegment.
- */
-public interface IdSegment extends Comparable<IdSegment> {
+import com.dyc.xiaohashu.id.generator.core.segment.grouped.Grouped;
+
+public interface IdSegment extends Comparable<IdSegment>, Grouped {
 
     long SEQUENCE_OVERFLOW = -1;
     long TIME_TO_LIVE_FOREVER = Long.MAX_VALUE;
@@ -26,7 +25,7 @@ public interface IdSegment extends Comparable<IdSegment> {
         if (TIME_TO_LIVE_FOREVER == getTtl()) {
             return false;
         }
-        return Clock.secondTime() - getFetchTime() > getTtl();
+        return Clock.SYSTEM.secondTime() - getFetchTime() > getTtl();
     }
 
     default boolean isOverflow() {

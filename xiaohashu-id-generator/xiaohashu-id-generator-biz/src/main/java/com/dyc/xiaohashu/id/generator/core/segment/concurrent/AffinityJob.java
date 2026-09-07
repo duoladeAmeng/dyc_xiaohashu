@@ -1,7 +1,9 @@
 package com.dyc.xiaohashu.id.generator.core.segment.concurrent;
 
+import com.dyc.xiaohashu.id.generator.core.segment.Clock;
+
 /**
- * Copied and modified from CosId's AffinityJob.
+ * Migrated from CosId's AffinityJob.
  */
 public interface AffinityJob extends Runnable {
 
@@ -12,11 +14,8 @@ public interface AffinityJob extends Runnable {
     }
 
     default void hungry() {
-        setHungerTime(System.currentTimeMillis() / 1000);
-        PrefetchWorker worker = getPrefetchWorker();
-        if (worker != null) {
-            worker.wakeup(this);
-        }
+        setHungerTime(Clock.CACHE.secondTime());
+        getPrefetchWorker().wakeup(this);
     }
 
     void setHungerTime(long hungerTime);

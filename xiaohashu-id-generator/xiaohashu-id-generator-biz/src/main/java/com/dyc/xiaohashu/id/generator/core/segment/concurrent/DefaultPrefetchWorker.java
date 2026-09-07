@@ -9,16 +9,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.LockSupport;
 
 /**
- * Copied and modified from CosId's DefaultPrefetchWorker.
+ * Migrated from CosId's DefaultPrefetchWorker.
  */
 public class DefaultPrefetchWorker extends Thread implements PrefetchWorker {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultPrefetchWorker.class);
     private static final AtomicInteger THREAD_COUNTER = new AtomicInteger();
 
+    private volatile boolean shutdown = false;
     private final Duration prefetchPeriod;
     private final CopyOnWriteArraySet<AffinityJob> affinityJobs = new CopyOnWriteArraySet<>();
-    private volatile boolean shutdown = false;
 
     public DefaultPrefetchWorker(Duration prefetchPeriod) {
         super("DefaultPrefetchWorker-" + THREAD_COUNTER.incrementAndGet());
@@ -26,28 +26,54 @@ public class DefaultPrefetchWorker extends Thread implements PrefetchWorker {
     }
 
     @Override
-    public void submit(AffinityJob affinityJob) {
+    public void shutdown() {
+        if (log.isInfoEnabled()) {
+            log.info("Shutdown!");
+        }
         if (shutdown) {
-            throw new IllegalStateException("PrefetchWorker is shutdown.");
+            return;
+        }
+        shutdown = true;
+    }
+
+    @Override
+    public void submit(AffinityJob affinityJob) {
+        if (log.isInfoEnabled()) {
+            log.info("Submit [{}] jobSize:[{}].", affinityJob.getJobId(), affinityJobs.size());
+        }
+
+        if (shutdown) {
+            throw new IllegalArgumentException("PrefetchWorker is shutdown.");
         }
         affinityJobs.add(affinityJob);
     }
 
     @Override
     public void cancel(AffinityJob affinityJob) {
+        if (log.isInfoEnabled()) {
+            log.info("Cancel [{}] jobSize:[{}].", affinityJob.getJobId(), affinityJobs.size());
+        }
         affinityJobs.remove(affinityJob);
     }
 
     @Override
     public void wakeup(AffinityJob affinityJob) {
-        if (!shutdown && !State.RUNNABLE.equals(getState())) {
-            LockSupport.unpark(this);
+        if (log.isDebugEnabled()) {
+            log.debug("Wakeup [{}] - state:[{}].", affinityJob.getJobId(), this.getState());
         }
-    }
+        if (shutdown) {
+            if (log.isWarnEnabled()) {
+                log.warn("Wakeup [{}] - PrefetchWorker is shutdown,Can't be awakened!", affinityJob.getJobId());
+            }
+            return;
+        }
 
-    @Override
-    public void shutdown() {
-        shutdown = true;
+        if (State.RUNNABLE.equals(this.getState())) {
+            if (log.isDebugEnabled()) {
+                log.debug("Wakeup [{}] - PrefetchWorker is running ,Don't need to be awakened.", affinityJob.getJobId());
+            }
+            return;
+        }
         LockSupport.unpark(this);
     }
 
@@ -59,12 +85,16 @@ public class DefaultPrefetchWorker extends Thread implements PrefetchWorker {
                     try {
                         job.run();
                     } catch (Throwable throwable) {
-                        log.warn("Segment prefetch job {} failed.", job.getJobId(), throwable);
+                        if (log.isErrorEnabled()) {
+                            log.error(throwable.getMessage(), throwable);
+                        }
                     }
                 });
                 LockSupport.parkNanos(this, prefetchPeriod.toNanos());
             } catch (Throwable throwable) {
-                log.warn("Segment prefetch worker failed.", throwable);
+                if (log.isErrorEnabled()) {
+                    log.error(throwable.getMessage(), throwable);
+                }
             }
         }
     }

@@ -21,9 +21,9 @@ class DistributedIdGenerateServiceImplTest {
         SnowflakeIdGenerator snowflakeIdGenerator = mock(SnowflakeIdGenerator.class);
         SegmentIdGenerator segmentIdGenerator = mock(SegmentIdGenerator.class);
         SegmentChainIdGenerator segmentChainIdGenerator = mock(SegmentChainIdGenerator.class);
-        when(snowflakeIdGenerator.nextId()).thenReturn(11L);
-        when(segmentIdGenerator.nextId()).thenReturn(22L);
-        when(segmentChainIdGenerator.nextId()).thenReturn(33L);
+        when(snowflakeIdGenerator.generate()).thenReturn(11L);
+        when(segmentIdGenerator.generate()).thenReturn(22L);
+        when(segmentChainIdGenerator.generate()).thenReturn(33L);
         DistributedIdGenerateServiceImpl service = new DistributedIdGenerateServiceImpl(
                 snowflakeIdGenerator,
                 segmentIdGenerator,
@@ -38,7 +38,7 @@ class DistributedIdGenerateServiceImplTest {
     @Test
     void batchGenerateIdsShouldReturnRequestedSize() {
         SegmentChainIdGenerator segmentChainIdGenerator = mock(SegmentChainIdGenerator.class);
-        when(segmentChainIdGenerator.nextId()).thenReturn(101L, 102L, 103L);
+        when(segmentChainIdGenerator.generate()).thenReturn(101L, 102L, 103L);
         DistributedIdGenerateServiceImpl service = new DistributedIdGenerateServiceImpl(null, null, segmentChainIdGenerator);
 
         BatchGenerateIdRspDTO response = service.batchGenerateIds(IdGeneratorType.SEGMENT_CHAIN, 3);

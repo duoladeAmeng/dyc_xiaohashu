@@ -30,7 +30,7 @@ class SnowflakeIdGeneratorTest {
         for (int i = 0; i < threads; i++) {
             executor.execute(() -> {
                 for (int j = 0; j < perThread; j++) {
-                    ids.add(generator.nextId());
+                    ids.add(generator.generate());
                 }
                 latch.countDown();
             });

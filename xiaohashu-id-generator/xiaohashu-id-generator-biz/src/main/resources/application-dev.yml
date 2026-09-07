@@ -18,17 +18,17 @@ distributed-id:
   stable-instance: false
   jdbc:
     initialize-schema: true
-    retry-attempts: 3
-    initial-backoff: 20ms
-    max-backoff: 500ms
   snowflake:
     enabled: true
-    epoch: 2025-01-01T00:00:00Z
+    epoch: 2019-12-24T16:00:00Z
     timestamp-bit: 41
     machine-bit: 10
     sequence-bit: 12
-    heartbeat-interval: 10s
-    safe-guard-duration: 30s
+    sequence-reset-threshold: 2047
+    clock-sync: true
+    guarder-initial-delay: 1m
+    guarder-delay: 1m
+    safe-guard-duration: 5m
     clock-spin-threshold: 1
     clock-broken-threshold: 500
   segment:

@@ -1,8 +1,7 @@
 package com.dyc.xiaohashu.id.generator.core.segment;
 
-/**
- * Copied and modified from CosId's MergedIdSegment.
- */
+import com.dyc.xiaohashu.id.generator.core.segment.grouped.GroupedKey;
+
 public class MergedIdSegment implements IdSegment {
 
     private final int segments;
@@ -21,6 +20,11 @@ public class MergedIdSegment implements IdSegment {
 
     public long getSingleStep() {
         return singleStep;
+    }
+
+    @Override
+    public GroupedKey group() {
+        return idSegment.group();
     }
 
     @Override

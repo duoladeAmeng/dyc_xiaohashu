@@ -5,9 +5,9 @@ import com.dyc.xiaohashu.id.generator.core.GeneratorUnavailableException;
 import com.dyc.xiaohashu.id.generator.core.IdGenerator;
 import com.dyc.xiaohashu.id.generator.core.segment.SegmentChainIdGenerator;
 import com.dyc.xiaohashu.id.generator.core.segment.SegmentIdGenerator;
-import com.dyc.xiaohashu.id.generator.core.snowflake.SnowflakeIdGenerator;
 import com.dyc.xiaohashu.id.generator.dto.resp.BatchGenerateIdRspDTO;
 import com.dyc.xiaohashu.id.generator.enums.IdGeneratorType;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,11 +18,11 @@ public class DistributedIdGenerateServiceImpl implements DistributedIdGenerateSe
 
     private static final int MAX_BATCH_SIZE = 1000;
 
-    private final SnowflakeIdGenerator snowflakeIdGenerator;
+    private final IdGenerator snowflakeIdGenerator;
     private final SegmentIdGenerator segmentIdGenerator;
     private final SegmentChainIdGenerator segmentChainIdGenerator;
 
-    public DistributedIdGenerateServiceImpl(SnowflakeIdGenerator snowflakeIdGenerator,
+    public DistributedIdGenerateServiceImpl(@Qualifier("snowflakeIdGenerator") IdGenerator snowflakeIdGenerator,
                                             SegmentIdGenerator segmentIdGenerator,
                                             SegmentChainIdGenerator segmentChainIdGenerator) {
         this.snowflakeIdGenerator = snowflakeIdGenerator;
@@ -32,7 +32,7 @@ public class DistributedIdGenerateServiceImpl implements DistributedIdGenerateSe
 
     @Override
     public long nextId(IdGeneratorType type) {
-        return generator(type).nextId();
+        return generator(type).generate();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DistributedIdGenerateServiceImpl implements DistributedIdGenerateSe
         IdGenerator generator = generator(type);
         List<Long> ids = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            ids.add(generator.nextId());
+            ids.add(generator.generate());
         }
         return BatchGenerateIdRspDTO.builder()
                 .type(type)

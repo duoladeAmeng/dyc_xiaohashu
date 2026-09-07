@@ -5,7 +5,7 @@ import com.dyc.xiaohashu.id.generator.core.IdGeneratorException;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Copied and modified from CosId's NextIdSegmentExpiredException.
+ * Migrated from CosId's NextIdSegmentExpiredException.
  */
 public class NextIdSegmentExpiredException extends IdGeneratorException {
 

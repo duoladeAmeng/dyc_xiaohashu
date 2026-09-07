@@ -1,10 +1,9 @@
 package com.dyc.xiaohashu.id.generator.core.segment;
 
+import com.dyc.xiaohashu.id.generator.core.segment.grouped.GroupedKey;
+
 import java.util.function.Function;
 
-/**
- * Copied and modified from CosId's IdSegmentChain.
- */
 public class IdSegmentChain implements IdSegment {
 
     public static final int ROOT_VERSION = -1;
@@ -59,6 +58,11 @@ public class IdSegmentChain implements IdSegment {
 
     public IdSegment getIdSegment() {
         return idSegment;
+    }
+
+    @Override
+    public GroupedKey group() {
+        return idSegment.group();
     }
 
     public long getVersion() {

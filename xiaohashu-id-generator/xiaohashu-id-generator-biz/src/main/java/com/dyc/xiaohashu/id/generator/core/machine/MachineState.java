@@ -3,26 +3,31 @@ package com.dyc.xiaohashu.id.generator.core.machine;
 import java.util.Objects;
 
 /**
- * Copied and modified from CosId's MachineState.
+ * Migrated from CosId's MachineState.
  */
 public final class MachineState {
 
     public static final MachineState NOT_FOUND = new MachineState(-1, -1);
+    public static final String STATE_DELIMITER = "|";
 
     private final int machineId;
-    private final long lastTimestamp;
+    private final long lastTimeStamp;
 
-    private MachineState(int machineId, long lastTimestamp) {
+    public MachineState(int machineId, long lastTimeStamp) {
         this.machineId = machineId;
-        this.lastTimestamp = lastTimestamp;
+        this.lastTimeStamp = lastTimeStamp;
     }
 
     public int getMachineId() {
         return machineId;
     }
 
+    public long getLastTimeStamp() {
+        return lastTimeStamp;
+    }
+
     public long getLastTimestamp() {
-        return lastTimestamp;
+        return lastTimeStamp;
     }
 
     public MachineState withLastTimestamp(long nextLastTimestamp) {
@@ -35,6 +40,20 @@ public final class MachineState {
 
     public static MachineState of(int machineId) {
         return of(machineId, System.currentTimeMillis());
+    }
+
+    public static MachineState of(String stateString) {
+        String[] stateSplits = stateString.split("\\|");
+        if (stateSplits.length != 2) {
+            throw new IllegalArgumentException(String.format("Machine status data:[{%s}] format error.", stateString));
+        }
+        int machineId = Integer.parseInt(stateSplits[0]);
+        long lastStamp = Long.parseLong(stateSplits[1]);
+        return MachineState.of(machineId, lastStamp);
+    }
+
+    public String toStateString() {
+        return machineId + STATE_DELIMITER + lastTimeStamp;
     }
 
     @Override
@@ -55,6 +74,6 @@ public final class MachineState {
 
     @Override
     public String toString() {
-        return "MachineState{machineId=" + machineId + ", lastTimestamp=" + lastTimestamp + '}';
+        return "MachineState{machineId=" + machineId + ", lastTimeStamp=" + lastTimeStamp + '}';
     }
 }

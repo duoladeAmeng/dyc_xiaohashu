@@ -1,9 +1,9 @@
 package com.dyc.xiaohashu.id.generator.core.segment;
 
-/**
- * 号段分配抽象。当前只提供 JDBC 实现，生成器核心不感知数据库。
- */
-public interface SegmentAllocator {
+import com.dyc.xiaohashu.id.generator.core.segment.grouped.Grouped;
+import com.dyc.xiaohashu.id.generator.core.segment.grouped.GroupedKey;
+
+public interface SegmentAllocator extends Grouped {
 
     int DEFAULT_SEGMENTS = 1;
     long DEFAULT_STEP = 10;
@@ -26,7 +26,7 @@ public interface SegmentAllocator {
     }
 
     default boolean allowReset() {
-        return true;
+        return GroupedKey.NEVER.equals(group());
     }
 
     default long nextMaxId() {
@@ -41,7 +41,7 @@ public interface SegmentAllocator {
         if (ttl <= 0) {
             throw new IllegalArgumentException("ttl must be greater than 0.");
         }
-        return new DefaultIdSegment(nextMaxId(), getStep(), Clock.secondTime(), ttl);
+        return new DefaultIdSegment(nextMaxId(), getStep(), Clock.SYSTEM.secondTime(), ttl, group());
     }
 
     default IdSegment nextIdSegment(int segments, long ttl) {
@@ -49,7 +49,7 @@ public interface SegmentAllocator {
             throw new IllegalArgumentException("segments must be greater than 0.");
         }
         long totalStep = getStep(segments);
-        return new MergedIdSegment(segments, new DefaultIdSegment(nextMaxId(totalStep), totalStep, Clock.secondTime(), ttl));
+        return new MergedIdSegment(segments, new DefaultIdSegment(nextMaxId(totalStep), totalStep, Clock.SYSTEM.secondTime(), ttl, group()));
     }
 
     default IdSegmentChain nextIdSegmentChain(IdSegmentChain previousChain, int segments, long ttl) {

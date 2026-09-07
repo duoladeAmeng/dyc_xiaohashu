@@ -1,29 +1,23 @@
-create table if not exists id_generator_machine (
-  name varchar(128) not null,
-  namespace varchar(64) not null,
-  machine_id int not null,
-  instance_id varchar(128) not null default '',
-  stable_instance boolean not null default false,
-  last_timestamp bigint not null,
-  last_heartbeat timestamp(3) null,
-  status varchar(16) not null,
-  version bigint not null default 0,
-  distribute_time timestamp(3) null,
-  revert_time timestamp(3) null,
-  primary key (name),
-  unique key uk_id_generator_machine_namespace_machine (namespace, machine_id),
-  key idx_id_generator_machine_instance (namespace, instance_id),
-  key idx_id_generator_machine_reclaim (namespace, status, last_timestamp)
-) engine=InnoDB default charset=utf8mb4;
+create table if not exists cosid
+(
+    name            varchar(100) not null comment '{namespace}.{name}',
+    last_max_id     bigint unsigned not null default 0,
+    last_fetch_time bigint unsigned not null default 0,
+    constraint cosid_pk
+        primary key (name)
+) engine = InnoDB;
 
-create table if not exists id_generator_segment (
-  namespace varchar(64) not null,
-  name varchar(64) not null,
-  last_max_id bigint not null,
-  step bigint not null,
-  version bigint not null default 0,
-  last_fetch_time timestamp(3) null,
-  create_time timestamp(3) not null default current_timestamp(3),
-  update_time timestamp(3) not null default current_timestamp(3) on update current_timestamp(3),
-  primary key (namespace, name)
-) engine=InnoDB default charset=utf8mb4;
+create table if not exists cosid_machine
+(
+    name            varchar(100)     not null comment '{namespace}.{machine_id}',
+    namespace       varchar(100)     not null,
+    machine_id      integer unsigned not null default 0,
+    last_timestamp  bigint unsigned  not null default 0,
+    instance_id     varchar(100)     not null default '',
+    distribute_time bigint unsigned  not null default 0,
+    revert_time     bigint unsigned  not null default 0,
+    constraint cosid_machine_pk
+        primary key (name),
+    key idx_namespace (namespace),
+    key idx_instance_id (instance_id)
+) engine = InnoDB;

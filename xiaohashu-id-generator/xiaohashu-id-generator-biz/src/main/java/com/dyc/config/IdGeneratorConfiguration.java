@@ -1,18 +1,21 @@
 package com.dyc.config;
 
 import com.dyc.xiaohashu.id.generator.core.machine.DefaultClockBackwardsSynchronizer;
+import com.dyc.xiaohashu.id.generator.core.machine.DefaultMachineIdGuarder;
+import com.dyc.xiaohashu.id.generator.core.machine.GuardDistribute;
 import com.dyc.xiaohashu.id.generator.core.machine.InstanceId;
+import com.dyc.xiaohashu.id.generator.core.machine.MachineIdGuarder;
+import com.dyc.xiaohashu.id.generator.core.machine.MachineState;
 import com.dyc.xiaohashu.id.generator.core.segment.SegmentChainIdGenerator;
 import com.dyc.xiaohashu.id.generator.core.segment.SegmentIdGenerator;
+import com.dyc.xiaohashu.id.generator.core.IdGenerator;
+import com.dyc.xiaohashu.id.generator.core.snowflake.ClockSyncSnowflakeIdGenerator;
 import com.dyc.xiaohashu.id.generator.core.segment.concurrent.PrefetchWorkerExecutorService;
 import com.dyc.xiaohashu.id.generator.core.snowflake.SnowflakeIdGenerator;
 import com.dyc.xiaohashu.id.generator.jdbc.JdbcIdGeneratorSchemaInitializer;
 import com.dyc.xiaohashu.id.generator.jdbc.JdbcMachineIdAllocator;
-import com.dyc.xiaohashu.id.generator.jdbc.JdbcRetryExecutor;
 import com.dyc.xiaohashu.id.generator.jdbc.JdbcSegmentAllocator;
-import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -43,74 +46,98 @@ public class IdGeneratorConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public JdbcRetryExecutor jdbcRetryExecutor() {
-        DistributedIdProperties.Jdbc jdbc = properties.getJdbc();
-        return new JdbcRetryExecutor(jdbc.getRetryAttempts(), jdbc.getInitialBackoff(), jdbc.getMaxBackoff());
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public JdbcMachineIdAllocator jdbcMachineIdAllocator(DataSource dataSource, JdbcRetryExecutor retryExecutor) {
-        return new JdbcMachineIdAllocator(dataSource, retryExecutor);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(name = "segmentJdbcAllocator")
-    @DependsOn("jdbcIdGeneratorSchemaInitializer")
-    public JdbcSegmentAllocator segmentJdbcAllocator(DataSource dataSource, JdbcRetryExecutor retryExecutor) {
-        return new JdbcSegmentAllocator(properties.getNamespace(), properties.getSegment().getName(), properties.getSegment().getStep(), dataSource, retryExecutor);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(name = "segmentChainJdbcAllocator")
-    @DependsOn("jdbcIdGeneratorSchemaInitializer")
-    public JdbcSegmentAllocator segmentChainJdbcAllocator(DataSource dataSource, JdbcRetryExecutor retryExecutor) {
-        return new JdbcSegmentAllocator(properties.getNamespace(), properties.getSegmentChain().getName(), properties.getSegmentChain().getStep(), dataSource, retryExecutor);
-    }
-
-    @Bean(destroyMethod = "close")
-    @ConditionalOnMissingBean
-    public PrefetchWorkerExecutorService prefetchWorkerExecutorService() {
-        return new PrefetchWorkerExecutorService(properties.getSegmentChain().getPrefetchPeriod(), properties.getSegmentChain().getWorkerCorePoolSize());
-    }
-
-    @Bean(destroyMethod = "close")
-    @ConditionalOnMissingBean
-    @DependsOn("jdbcIdGeneratorSchemaInitializer")
-    public SnowflakeIdGenerator snowflakeIdGenerator(JdbcMachineIdAllocator machineIdAllocator, ObjectProvider<MeterRegistry> meterRegistry) {
+    public DefaultClockBackwardsSynchronizer defaultClockBackwardsSynchronizer() {
         DistributedIdProperties.Snowflake snowflake = properties.getSnowflake();
-        return new SnowflakeIdGenerator(
-                properties.getNamespace(),
-                snowflake.getEpoch().toEpochMilli(),
-                snowflake.getTimestampBit(),
-                snowflake.getMachineBit(),
-                snowflake.getSequenceBit(),
-                InstanceId.of(resolveInstanceId(), properties.isStableInstance()),
+        return new DefaultClockBackwardsSynchronizer(snowflake.getClockSpinThreshold(), snowflake.getClockBrokenThreshold());
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public JdbcMachineIdAllocator jdbcMachineIdAllocator(DataSource dataSource, DefaultClockBackwardsSynchronizer clockBackwardsSynchronizer) {
+        return new JdbcMachineIdAllocator(dataSource, com.dyc.xiaohashu.id.generator.core.machine.MachineStateStorage.LOCAL, clockBackwardsSynchronizer);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public MachineIdGuarder machineIdGuarder(JdbcMachineIdAllocator machineIdAllocator) {
+        DistributedIdProperties.Snowflake snowflake = properties.getSnowflake();
+        return new DefaultMachineIdGuarder(
                 machineIdAllocator,
-                snowflake.getHeartbeatInterval(),
-                snowflake.getSafeGuardDuration(),
-                new DefaultClockBackwardsSynchronizer(snowflake.getClockSpinThreshold(), snowflake.getClockBrokenThreshold()),
-                meterRegistry.getIfAvailable()
+                DefaultMachineIdGuarder.executorService(),
+                snowflake.getGuarderInitialDelay(),
+                snowflake.getGuarderDelay(),
+                snowflake.getSafeGuardDuration()
         );
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public SegmentIdGenerator segmentIdGenerator(@Qualifier("segmentJdbcAllocator") JdbcSegmentAllocator segmentJdbcAllocator, ObjectProvider<MeterRegistry> meterRegistry) {
-        return new SegmentIdGenerator(properties.getSegment().getTtlSeconds(), segmentJdbcAllocator, meterRegistry.getIfAvailable());
+    public GuardDistribute guardDistribute(JdbcMachineIdAllocator machineIdAllocator, MachineIdGuarder machineIdGuarder) {
+        return new GuardDistribute(machineIdAllocator, machineIdGuarder);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public CosIdMachineIdLifecycle cosIdMachineIdLifecycle(MachineIdGuarder machineIdGuarder, JdbcMachineIdAllocator machineIdAllocator) {
+        return new CosIdMachineIdLifecycle(machineIdGuarder, machineIdAllocator);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "segmentJdbcAllocator")
+    @DependsOn("jdbcIdGeneratorSchemaInitializer")
+    public JdbcSegmentAllocator segmentJdbcAllocator(DataSource dataSource) {
+        return new JdbcSegmentAllocator(properties.getNamespace(), properties.getSegment().getName(), properties.getSegment().getStep(), dataSource);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "segmentChainJdbcAllocator")
+    @DependsOn("jdbcIdGeneratorSchemaInitializer")
+    public JdbcSegmentAllocator segmentChainJdbcAllocator(DataSource dataSource) {
+        return new JdbcSegmentAllocator(properties.getNamespace(), properties.getSegmentChain().getName(), properties.getSegmentChain().getStep(), dataSource);
+    }
+
+    @Bean(destroyMethod = "shutdown")
+    @ConditionalOnMissingBean
+    public PrefetchWorkerExecutorService prefetchWorkerExecutorService() {
+        return new PrefetchWorkerExecutorService(properties.getSegmentChain().getPrefetchPeriod(), properties.getSegmentChain().getWorkerCorePoolSize());
+    }
+
+    @Bean(name = "snowflakeIdGenerator")
+    @ConditionalOnMissingBean(name = "snowflakeIdGenerator")
+    @DependsOn("jdbcIdGeneratorSchemaInitializer")
+    public IdGenerator snowflakeIdGenerator(GuardDistribute guardDistribute, DefaultClockBackwardsSynchronizer clockBackwardsSynchronizer) {
+        DistributedIdProperties.Snowflake snowflake = properties.getSnowflake();
+        InstanceId instanceId = InstanceId.of(resolveInstanceId(), properties.isStableInstance());
+        MachineState machineState = guardDistribute.distribute(properties.getNamespace(), snowflake.getMachineBit(), instanceId, snowflake.getSafeGuardDuration());
+        SnowflakeIdGenerator snowflakeIdGenerator = new SnowflakeIdGenerator(
+                snowflake.getEpoch().toEpochMilli(),
+                snowflake.getTimestampBit(),
+                snowflake.getMachineBit(),
+                snowflake.getSequenceBit(),
+                machineState.getMachineId(),
+                snowflake.getSequenceResetThreshold()
+        );
+        if (snowflake.isClockSync()) {
+            return new ClockSyncSnowflakeIdGenerator(snowflakeIdGenerator, clockBackwardsSynchronizer);
+        }
+        return snowflakeIdGenerator;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SegmentIdGenerator segmentIdGenerator(@Qualifier("segmentJdbcAllocator") JdbcSegmentAllocator segmentJdbcAllocator) {
+        return new SegmentIdGenerator(properties.getSegment().getTtlSeconds(), segmentJdbcAllocator);
     }
 
     @Bean
     @ConditionalOnMissingBean
     public SegmentChainIdGenerator segmentChainIdGenerator(@Qualifier("segmentChainJdbcAllocator") JdbcSegmentAllocator segmentChainJdbcAllocator,
-                                                           PrefetchWorkerExecutorService prefetchWorkerExecutorService,
-                                                           ObjectProvider<MeterRegistry> meterRegistry) {
+                                                           PrefetchWorkerExecutorService prefetchWorkerExecutorService) {
         return new SegmentChainIdGenerator(
                 properties.getSegmentChain().getTtlSeconds(),
                 properties.getSegmentChain().getSafeDistance(),
                 segmentChainJdbcAllocator,
-                prefetchWorkerExecutorService,
-                meterRegistry.getIfAvailable()
+                prefetchWorkerExecutorService
         );
     }
 

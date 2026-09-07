@@ -7,11 +7,39 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class JdbcIdGeneratorSchemaInitializer {
 
     private static final Logger log = LoggerFactory.getLogger(JdbcIdGeneratorSchemaInitializer.class);
+
+    public static final String INIT_COSID_TABLE_SQL =
+            "create table if not exists cosid\n"
+                    + "(\n"
+                    + "    name            varchar(100) not null comment '{namespace}.{name}',\n"
+                    + "    last_max_id     bigint unsigned not null default 0,\n"
+                    + "    last_fetch_time bigint unsigned not null default 0,\n"
+                    + "    constraint cosid_pk\n"
+                    + "        primary key (name)\n"
+                    + ") engine = InnoDB;";
+
+    public static final String INIT_ID_SEGMENT_SQL = "insert into cosid (name, last_max_id,last_fetch_time) value (?, ?,unix_timestamp());";
+
+    public static final String INIT_COSID_MACHINE_TABLE_SQL =
+            "create table if not exists cosid_machine\n"
+                    + "(\n"
+                    + "    name            varchar(100)     not null comment '{namespace}.{machine_id}',\n"
+                    + "    namespace       varchar(100)     not null,\n"
+                    + "    machine_id      integer unsigned not null default 0,\n"
+                    + "    last_timestamp  bigint unsigned  not null default 0,\n"
+                    + "    instance_id     varchar(100)     not null default '',\n"
+                    + "    distribute_time bigint unsigned  not null default 0,\n"
+                    + "    revert_time     bigint unsigned  not null default 0,\n"
+                    + "    constraint cosid_machine_pk\n"
+                    + "        primary key (name),\n"
+                    + "    key idx_namespace (namespace),\n"
+                    + "    key idx_instance_id (instance_id)\n"
+                    + ") engine = InnoDB;";
 
     private final DataSource dataSource;
 
@@ -20,59 +48,71 @@ public class JdbcIdGeneratorSchemaInitializer {
     }
 
     public void initialize(String namespace, String segmentName, long segmentStep, String segmentChainName, long segmentChainStep, long initialMaxId) {
+        tryInitCosIdTable();
+        tryInitCosIdMachineTable();
+        tryInitIdSegment(namespace + "." + segmentName, initialMaxId);
+        tryInitIdSegment(namespace + "." + segmentChainName, initialMaxId);
+    }
+
+    public int initCosIdTable() throws SQLException {
+        log.info("Init CosIdTable");
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            statement.executeUpdate("""
-                    create table if not exists id_generator_machine (
-                      name varchar(128) not null,
-                      namespace varchar(64) not null,
-                      machine_id int not null,
-                      instance_id varchar(128) not null default '',
-                      stable_instance boolean not null default false,
-                      last_timestamp bigint not null,
-                      last_heartbeat timestamp(3) null,
-                      status varchar(16) not null,
-                      version bigint not null default 0,
-                      distribute_time timestamp(3) null,
-                      revert_time timestamp(3) null,
-                      primary key (name),
-                      unique key uk_id_generator_machine_namespace_machine (namespace, machine_id),
-                      key idx_id_generator_machine_instance (namespace, instance_id),
-                      key idx_id_generator_machine_reclaim (namespace, status, last_timestamp)
-                    ) engine=InnoDB default charset=utf8mb4
-                    """);
-            statement.executeUpdate("""
-                    create table if not exists id_generator_segment (
-                      namespace varchar(64) not null,
-                      name varchar(64) not null,
-                      last_max_id bigint not null,
-                      step bigint not null,
-                      version bigint not null default 0,
-                      last_fetch_time timestamp(3) null,
-                      create_time timestamp(3) not null default current_timestamp(3),
-                      update_time timestamp(3) not null default current_timestamp(3) on update current_timestamp(3),
-                      primary key (namespace, name)
-                    ) engine=InnoDB default charset=utf8mb4
-                    """);
-            upsertSegment(connection, namespace, segmentName, segmentStep, initialMaxId);
-            upsertSegment(connection, namespace, segmentChainName, segmentChainStep, initialMaxId);
-            log.info("Initialized JDBC id-generator schema for namespace {}.", namespace);
-        } catch (SQLException exception) {
-            throw new IllegalStateException("Initialize id-generator schema failed.", exception);
+             PreparedStatement statement = connection.prepareStatement(INIT_COSID_TABLE_SQL)) {
+            return statement.executeUpdate();
         }
     }
 
-    private void upsertSegment(Connection connection, String namespace, String name, long step, long initialMaxId) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("""
-                insert into id_generator_segment(namespace,name,last_max_id,step,last_fetch_time)
-                values(?,?,?,?,current_timestamp(3))
-                on duplicate key update namespace=namespace
-                """)) {
-            statement.setString(1, namespace);
-            statement.setString(2, name);
-            statement.setLong(3, initialMaxId);
-            statement.setLong(4, step);
-            statement.executeUpdate();
+    public boolean tryInitCosIdTable() {
+        try {
+            initCosIdTable();
+            return true;
+        } catch (Throwable throwable) {
+            log.info("Try Init CosIdTable failed.[{}]", throwable.getMessage());
+            return false;
+        }
+    }
+
+    public int initIdSegment(String segmentName, long offset) throws SQLException, SQLIntegrityConstraintViolationException {
+        if (segmentName == null || segmentName.isEmpty()) {
+            throw new IllegalArgumentException("segmentName can not be empty!");
+        }
+        if (offset < 0) {
+            throw new IllegalArgumentException(String.format("offset:[%s] must be greater than or equal to 0!", offset));
+        }
+        log.info("Init IdSegment - segmentName:[{}] - offset:[{}]", segmentName, offset);
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement initStatement = connection.prepareStatement(INIT_ID_SEGMENT_SQL)) {
+            initStatement.setString(1, segmentName);
+            initStatement.setLong(2, offset);
+            return initStatement.executeUpdate();
+        }
+    }
+
+    public boolean tryInitIdSegment(String segmentName, long offset) {
+        try {
+            initIdSegment(segmentName, offset);
+            return true;
+        } catch (Throwable throwable) {
+            log.info("Try Init IdSegment failed.[{}]", throwable.getMessage());
+            return false;
+        }
+    }
+
+    public void initCosIdMachineTable() throws SQLException {
+        log.info("Init CosIdMachineTable");
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement initStatement = connection.prepareStatement(INIT_COSID_MACHINE_TABLE_SQL)) {
+            initStatement.executeUpdate();
+        }
+    }
+
+    public boolean tryInitCosIdMachineTable() {
+        try {
+            initCosIdMachineTable();
+            return true;
+        } catch (Throwable throwable) {
+            log.info("Try Init CosIdMachineTable failed.[{}]", throwable.getMessage());
+            return false;
         }
     }
 }

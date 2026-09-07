@@ -19,10 +19,10 @@ class SegmentIdGeneratorTest {
     void shouldSwitchSegmentWhenCurrentSegmentOverflows() {
         SegmentIdGenerator generator = new SegmentIdGenerator(new AtomicSegmentAllocator("segment", 3));
 
-        assertEquals(1, generator.nextId());
-        assertEquals(2, generator.nextId());
-        assertEquals(3, generator.nextId());
-        assertEquals(4, generator.nextId());
+        assertEquals(1, generator.generate());
+        assertEquals(2, generator.generate());
+        assertEquals(3, generator.generate());
+        assertEquals(4, generator.generate());
     }
 
     @Test
@@ -37,7 +37,7 @@ class SegmentIdGeneratorTest {
         for (int i = 0; i < threads; i++) {
             executor.execute(() -> {
                 for (int j = 0; j < perThread; j++) {
-                    ids.add(generator.nextId());
+                    ids.add(generator.generate());
                 }
                 latch.countDown();
             });

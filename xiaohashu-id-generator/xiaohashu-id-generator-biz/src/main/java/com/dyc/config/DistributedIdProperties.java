@@ -1,5 +1,9 @@
 package com.dyc.config;
 
+import com.dyc.xiaohashu.id.generator.core.CosId;
+import com.dyc.xiaohashu.id.generator.core.machine.DefaultClockBackwardsSynchronizer;
+import com.dyc.xiaohashu.id.generator.core.machine.DefaultMachineIdGuarder;
+import com.dyc.xiaohashu.id.generator.core.snowflake.SnowflakeIdGenerator;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -39,12 +43,6 @@ public class DistributedIdProperties {
         }
         if (!snowflake.epoch.isBefore(Instant.now().plus(Duration.ofDays(1)))) {
             throw new IllegalArgumentException("snowflake epoch is unreasonable.");
-        }
-        if (snowflake.heartbeatInterval.compareTo(snowflake.safeGuardDuration) >= 0) {
-            throw new IllegalArgumentException("snowflake heartbeatInterval must be less than safeGuardDuration.");
-        }
-        if (jdbc.initialBackoff.compareTo(jdbc.maxBackoff) > 0) {
-            throw new IllegalArgumentException("jdbc initialBackoff must be less than or equal to maxBackoff.");
         }
     }
 
@@ -106,10 +104,6 @@ public class DistributedIdProperties {
 
     public static class Jdbc {
         private boolean initializeSchema = true;
-        @Min(1)
-        private int retryAttempts = 3;
-        private Duration initialBackoff = Duration.ofMillis(20);
-        private Duration maxBackoff = Duration.ofMillis(500);
 
         public boolean isInitializeSchema() {
             return initializeSchema;
@@ -118,47 +112,26 @@ public class DistributedIdProperties {
         public void setInitializeSchema(boolean initializeSchema) {
             this.initializeSchema = initializeSchema;
         }
-
-        public int getRetryAttempts() {
-            return retryAttempts;
-        }
-
-        public void setRetryAttempts(int retryAttempts) {
-            this.retryAttempts = retryAttempts;
-        }
-
-        public Duration getInitialBackoff() {
-            return initialBackoff;
-        }
-
-        public void setInitialBackoff(Duration initialBackoff) {
-            this.initialBackoff = initialBackoff;
-        }
-
-        public Duration getMaxBackoff() {
-            return maxBackoff;
-        }
-
-        public void setMaxBackoff(Duration maxBackoff) {
-            this.maxBackoff = maxBackoff;
-        }
     }
 
     public static class Snowflake {
         private boolean enabled = true;
-        private Instant epoch = Instant.parse("2025-01-01T00:00:00Z");
+        private Instant epoch = Instant.ofEpochMilli(CosId.COSID_EPOCH);
         @Min(1)
-        private int timestampBit = 41;
+        private int timestampBit = SnowflakeIdGenerator.DEFAULT_TIMESTAMP_BIT;
         @Min(1)
-        private int machineBit = 10;
+        private int machineBit = SnowflakeIdGenerator.DEFAULT_MACHINE_BIT;
         @Min(1)
-        private int sequenceBit = 12;
-        private Duration heartbeatInterval = Duration.ofSeconds(10);
-        private Duration safeGuardDuration = Duration.ofSeconds(30);
+        private int sequenceBit = SnowflakeIdGenerator.DEFAULT_SEQUENCE_BIT;
+        private long sequenceResetThreshold = SnowflakeIdGenerator.DEFAULT_SEQUENCE_RESET_THRESHOLD;
+        private boolean clockSync = true;
+        private Duration guarderInitialDelay = DefaultMachineIdGuarder.DEFAULT_INITIAL_DELAY;
+        private Duration guarderDelay = DefaultMachineIdGuarder.DEFAULT_DELAY;
+        private Duration safeGuardDuration = Duration.ofMinutes(5);
         @Min(1)
-        private int clockSpinThreshold = 1;
+        private int clockSpinThreshold = DefaultClockBackwardsSynchronizer.DEFAULT_SPIN_THRESHOLD;
         @Min(2)
-        private int clockBrokenThreshold = 500;
+        private int clockBrokenThreshold = DefaultClockBackwardsSynchronizer.DEFAULT_BROKEN_THRESHOLD;
 
         public boolean isEnabled() {
             return enabled;
@@ -200,12 +173,36 @@ public class DistributedIdProperties {
             this.sequenceBit = sequenceBit;
         }
 
-        public Duration getHeartbeatInterval() {
-            return heartbeatInterval;
+        public long getSequenceResetThreshold() {
+            return sequenceResetThreshold;
         }
 
-        public void setHeartbeatInterval(Duration heartbeatInterval) {
-            this.heartbeatInterval = heartbeatInterval;
+        public void setSequenceResetThreshold(long sequenceResetThreshold) {
+            this.sequenceResetThreshold = sequenceResetThreshold;
+        }
+
+        public boolean isClockSync() {
+            return clockSync;
+        }
+
+        public void setClockSync(boolean clockSync) {
+            this.clockSync = clockSync;
+        }
+
+        public Duration getGuarderInitialDelay() {
+            return guarderInitialDelay;
+        }
+
+        public void setGuarderInitialDelay(Duration guarderInitialDelay) {
+            this.guarderInitialDelay = guarderInitialDelay;
+        }
+
+        public Duration getGuarderDelay() {
+            return guarderDelay;
+        }
+
+        public void setGuarderDelay(Duration guarderDelay) {
+            this.guarderDelay = guarderDelay;
         }
 
         public Duration getSafeGuardDuration() {

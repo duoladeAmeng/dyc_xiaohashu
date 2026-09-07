@@ -24,8 +24,7 @@ class SegmentChainIdGeneratorTest {
                     IdSegment.TIME_TO_LIVE_FOREVER,
                     2,
                     new SegmentIdGeneratorTest.AtomicSegmentAllocator("segment-chain", 64),
-                    prefetchWorkers,
-                    null
+                    prefetchWorkers
             );
             int threads = 8;
             int perThread = 1000;
@@ -36,7 +35,7 @@ class SegmentChainIdGeneratorTest {
             for (int i = 0; i < threads; i++) {
                 executor.execute(() -> {
                     for (int j = 0; j < perThread; j++) {
-                        ids.add(generator.nextId());
+                        ids.add(generator.generate());
                     }
                     latch.countDown();
                 });
