@@ -1,6 +1,5 @@
 package com.dyc.xiaohashu.kv.constant;
 
-
 public interface ApiConstants {
 
     /**

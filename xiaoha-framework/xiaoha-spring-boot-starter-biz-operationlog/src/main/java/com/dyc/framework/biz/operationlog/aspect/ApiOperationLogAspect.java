@@ -1,16 +1,13 @@
+
 package com.dyc.framework.biz.operationlog.aspect;
 
-
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.dyc.framework.common.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -20,14 +17,6 @@ import java.util.stream.Collectors;
 @Aspect
 @Slf4j
 public class ApiOperationLogAspect {
-
-    private final ObjectMapper objectMapper;
-
-    public ApiOperationLogAspect(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper.copy();
-    }
-
-
 
     /** 以自定义 @ApiOperationLog 注解为切点，凡是添加 @ApiOperationLog 的方法，都会执行环绕中的代码 */
     @Pointcut("@annotation(com.dyc.framework.biz.operationlog.aspect.ApiOperationLog)")
@@ -48,11 +37,10 @@ public class ApiOperationLogAspect {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
 
-
         // 请求入参
         Object[] args = joinPoint.getArgs();
         // 入参转 JSON 字符串
-        String argsJsonStr = Arrays.stream(args).map(this::toJson).collect(Collectors.joining(", "));
+        String argsJsonStr = Arrays.stream(args).map(toJsonStr()).collect(Collectors.joining(", "));
 
         // 功能描述信息
         String description = getApiOperationLogDescription(joinPoint);
@@ -64,13 +52,12 @@ public class ApiOperationLogAspect {
         // 执行切点方法
         Object result = joinPoint.proceed();
 
-
         // 执行耗时
         long executionTime = System.currentTimeMillis() - startTime;
 
         // 打印出参等相关信息
         log.info("====== 请求结束: [{}], 耗时: {}ms, 出参: {} =================================== ",
-                description, executionTime, toJson (result));
+                description, executionTime, JsonUtils.toJsonString(result));
 
         return result;
     }
@@ -95,19 +82,11 @@ public class ApiOperationLogAspect {
     }
 
     /**
-     * JSON 序列化
+     * 转 JSON 字符串
+     * @return
      */
-    private String toJson(Object object) {
-
-        if (object == null) {
-            return null;
-        }
-        try {
-            return objectMapper.writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            log.warn("操作日志参数 JSON 序列化失败", e);
-            return String.valueOf(object);
-        }
+    private Function<Object, String> toJsonStr() {
+        return JsonUtils::toJsonString;
     }
 
 }

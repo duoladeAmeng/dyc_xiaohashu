@@ -3,7 +3,6 @@ package com.dyc.xiaohashu.note.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @Getter
 @AllArgsConstructor
 public enum NoteStatusEnum {

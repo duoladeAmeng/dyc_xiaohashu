@@ -17,21 +17,15 @@
     from t_channel
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from t_channel
-    where is_deleted = 0
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_channel
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.dyc.xiaohashu.note.domain.dataobject.ChannelDO">
     insert into t_channel (id, `name`, create_time,
-                           update_time, is_deleted)
+      update_time, is_deleted)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-            #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.dyc.xiaohashu.note.domain.dataobject.ChannelDO">
     insert into t_channel
@@ -91,9 +85,9 @@
   <update id="updateByPrimaryKey" parameterType="com.dyc.xiaohashu.note.domain.dataobject.ChannelDO">
     update t_channel
     set `name` = #{name,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-        is_deleted = #{isDeleted,jdbcType=BIT}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

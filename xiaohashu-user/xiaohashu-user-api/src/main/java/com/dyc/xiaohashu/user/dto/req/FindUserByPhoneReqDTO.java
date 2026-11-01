@@ -1,5 +1,6 @@
 package com.dyc.xiaohashu.user.dto.req;
 
+import com.dyc.framework.common.validator.PhoneNumber;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +17,7 @@ public class FindUserByPhoneReqDTO {
      * 手机号
      */
     @NotBlank(message = "手机号不能为空")
+    @PhoneNumber
     private String phone;
+
 }

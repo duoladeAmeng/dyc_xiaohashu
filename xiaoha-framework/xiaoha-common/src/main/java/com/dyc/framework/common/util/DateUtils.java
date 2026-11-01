@@ -1,63 +1,93 @@
 package com.dyc.framework.common.util;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
+import com.dyc.framework.common.constants.DateConstants;
+
+import java.time.*;
 import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 
-public final class DateUtils {
+public class DateUtils {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter MONTH_DAY_FORMATTER = DateTimeFormatter.ofPattern("MM-dd");
-    private static final DateTimeFormatter HOUR_MINUTE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
-
-    private DateUtils() {
-    }
-
+    /**
+     * LocalDateTime 转时间戳
+     *
+     * @param localDateTime
+     * @return
+     */
     public static long localDateTime2Timestamp(LocalDateTime localDateTime) {
         return localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli();
     }
 
+    /**
+     * LocalDateTime 转 String 字符串
+     * @param time
+     * @return
+     */
     public static String localDateTime2String(LocalDateTime time) {
-        return time.format(DATE_TIME_FORMATTER);
+        return time.format(DateConstants.DATE_FORMAT_Y_M_D_H_M_S);
     }
 
-    public static String parse2DateStr(LocalDateTime time) {
-        if (Objects.isNull(time)) {
-            return null;
-        }
-        return time.format(DATE_FORMATTER);
-    }
-
+    /**
+     * LocalDateTime 转友好的相对时间字符串
+     * @param dateTime
+     * @return
+     */
     public static String formatRelativeTime(LocalDateTime dateTime) {
+        // 当前时间
         LocalDateTime now = LocalDateTime.now();
+
+        // 计算与当前时间的差距
         long daysDiff = ChronoUnit.DAYS.between(dateTime, now);
         long hoursDiff = ChronoUnit.HOURS.between(dateTime, now);
         long minutesDiff = ChronoUnit.MINUTES.between(dateTime, now);
 
-        if (daysDiff < 1) {
-            if (hoursDiff < 1) {
-                return minutesDiff < 10 ? "刚刚" : minutesDiff + " 分钟前";
+        if (daysDiff < 1) {  // 如果是今天
+            if (hoursDiff < 1) {  // 如果是几分钟前
+                return minutesDiff + "分钟前";
+            } else {  // 如果是几小时前
+                return hoursDiff + "小时前";
             }
-            return hoursDiff + " 小时前";
+        } else if (daysDiff == 1) {  // 如果是昨天
+            return "昨天 " + dateTime.format(DateConstants.DATE_FORMAT_H_M);
+        } else if (daysDiff < 7) {  // 如果是最近一周
+            return daysDiff + "天前";
+        } else if (dateTime.getYear() == now.getYear()) {  // 如果是今年
+            return dateTime.format(DateConstants.DATE_FORMAT_M_D);
+        } else {  // 如果是去年或更早
+            return dateTime.format(DateConstants.DATE_FORMAT_Y_M_D);
         }
-        if (daysDiff == 1) {
-            return "昨天 " + dateTime.format(HOUR_MINUTE_FORMATTER);
-        }
-        if (daysDiff < 7) {
-            return daysDiff + " 天前";
-        }
-        if (dateTime.getYear() == now.getYear()) {
-            return dateTime.format(MONTH_DAY_FORMATTER);
-        }
-        return dateTime.format(DATE_FORMATTER);
     }
 
+    /**
+     * 计算年龄
+     *
+     * @param birthDate 出生日期（LocalDate）
+     * @return 计算得到的年龄（以年为单位）
+     */
     public static int calculateAge(LocalDate birthDate) {
-        return Period.between(birthDate, LocalDate.now()).getYears();
+        // 获取当前日期
+        LocalDate currentDate = LocalDate.now();
+
+        // 计算出生日期到当前日期的 Period 对象
+        Period period = Period.between(birthDate, currentDate);
+
+        // 返回完整的年份（即年龄）
+        return period.getYears();
+    }
+
+    public static void main(String[] args) {
+        // 测试示例
+        LocalDateTime dateTime1 = LocalDateTime.now().minusMinutes(10); // 10分钟前
+        LocalDateTime dateTime2 = LocalDateTime.now().minusHours(3); // 3小时前
+        LocalDateTime dateTime3 = LocalDateTime.now().minusDays(1).minusHours(5); // 昨天 20:12
+        LocalDateTime dateTime4 = LocalDateTime.now().minusDays(2); // 2天前
+        LocalDateTime dateTime5 = LocalDateTime.now().minusDays(10); // 11-06
+        LocalDateTime dateTime6 = LocalDateTime.of(2023, 12, 1, 12, 30, 0); // 2023-12-01
+
+        System.out.println(formatRelativeTime(dateTime1)); // 输出 "10分钟前"
+        System.out.println(formatRelativeTime(dateTime2)); // 输出 "3小时前"
+        System.out.println(formatRelativeTime(dateTime3)); // 输出 "昨天 20:12"
+        System.out.println(formatRelativeTime(dateTime4)); // 输出 "2天前"
+        System.out.println(formatRelativeTime(dateTime5)); // 输出 "11-06"
+        System.out.println(formatRelativeTime(dateTime6)); // 输出 "2023-12-01"
     }
 }

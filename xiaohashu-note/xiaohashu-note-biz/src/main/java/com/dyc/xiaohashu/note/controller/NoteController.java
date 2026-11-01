@@ -2,13 +2,8 @@ package com.dyc.xiaohashu.note.controller;
 
 import com.dyc.framework.biz.operationlog.aspect.ApiOperationLog;
 import com.dyc.framework.common.response.Response;
-import com.dyc.xiaohashu.note.dto.req.DeleteNoteReq;
-import com.dyc.xiaohashu.note.dto.req.FindNoteDetailReq;
-import com.dyc.xiaohashu.note.dto.req.PublishNoteReq;
-import com.dyc.xiaohashu.note.dto.req.TopNoteReq;
-import com.dyc.xiaohashu.note.dto.req.UpdateNoteReq;
-import com.dyc.xiaohashu.note.dto.req.UpdateNoteVisibleOnlyMeReq;
-import com.dyc.xiaohashu.note.dto.rsp.FindNoteDetailRsp;
+import com.dyc.xiaohashu.note.dto.req.*;
+import com.dyc.xiaohashu.note.dto.rsp.*;
 import com.dyc.xiaohashu.note.service.NoteService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -60,5 +55,41 @@ public class NoteController {
     @ApiOperationLog(description = "置顶/取消置顶笔记")
     public Response<?> topNote(@Validated @RequestBody TopNoteReq topNoteReq) {
         return noteService.topNote(topNoteReq);
+    }
+
+    @PostMapping(value = "/like")
+    @ApiOperationLog(description = "点赞笔记")
+    public Response<?> likeNote(@Validated @RequestBody LikeNoteReq likeNoteReq) {
+        return noteService.likeNote(likeNoteReq);
+    }
+
+    @PostMapping(value = "/unlike")
+    @ApiOperationLog(description = "取消点赞笔记")
+    public Response<?> unlikeNote(@Validated @RequestBody UnlikeNoteReq unlikeNoteReq) {
+        return noteService.unlikeNote(unlikeNoteReq);
+    }
+
+    @PostMapping(value = "/collect")
+    @ApiOperationLog(description = "收藏笔记")
+    public Response<?> collectNote(@Validated @RequestBody CollectNoteReq collectNoteReq) {
+        return noteService.collectNote(collectNoteReq);
+    }
+
+    @PostMapping(value = "/uncollect")
+    @ApiOperationLog(description = "取消收藏笔记")
+    public Response<?> unCollectNote(@Validated @RequestBody UnCollectNoteReq unCollectNoteReq) {
+        return noteService.unCollectNote(unCollectNoteReq);
+    }
+
+    @PostMapping(value = "/isLikedAndCollectedData")
+    @ApiOperationLog(description = "获取当前用户是否点赞、收藏数据")
+    public Response<FindNoteIsLikedAndCollectedRsp> isLikedAndCollectedData(@Validated @RequestBody FindNoteIsLikedAndCollectedReq findNoteIsLikedAndCollectedReq) {
+        return noteService.isLikedAndCollectedData(findNoteIsLikedAndCollectedReq);
+    }
+
+    @PostMapping(value = "/published/list")
+    @ApiOperationLog(description = "用户主页 - 已发布笔记列表")
+    public Response<FindPublishedNoteListRsp> findPublishedNoteList(@Validated @RequestBody FindPublishedNoteListReq findPublishedNoteListReq) {
+        return noteService.findPublishedNoteList(findPublishedNoteListReq);
     }
 }

@@ -1,11 +1,10 @@
 package com.dyc.xiaohashu.user.api;
 
-
 import com.dyc.framework.common.response.Response;
 import com.dyc.xiaohashu.user.constant.ApiConstants;
 import com.dyc.xiaohashu.user.dto.req.*;
-import com.dyc.xiaohashu.user.dto.resp.FindUserByIdRspDTO;
-import com.dyc.xiaohashu.user.dto.resp.FindUserByPhoneRspDTO;
+import com.dyc.xiaohashu.user.dto.rsp.FindUserByIdRspDTO;
+import com.dyc.xiaohashu.user.dto.rsp.FindUserByPhoneRspDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

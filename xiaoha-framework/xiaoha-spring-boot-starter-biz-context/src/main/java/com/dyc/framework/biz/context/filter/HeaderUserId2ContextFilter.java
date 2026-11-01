@@ -7,14 +7,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-
 @Slf4j
-public class HeaderUserId2ContextFilter extends OncePerRequestFilter implements jakarta.servlet.Filter {
+public class HeaderUserId2ContextFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -23,7 +22,7 @@ public class HeaderUserId2ContextFilter extends OncePerRequestFilter implements 
         String userId = request.getHeader(GlobalConstants.USER_ID);
 
         // 判断请求头中是否存在用户 ID
-        if (!StringUtils.hasText(userId)) {
+        if (StringUtils.isBlank(userId)) {
             // 若为空，则直接放行
             chain.doFilter(request, response);
             return;

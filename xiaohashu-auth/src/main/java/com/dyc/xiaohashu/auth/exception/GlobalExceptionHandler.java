@@ -1,6 +1,5 @@
 package com.dyc.xiaohashu.auth.exception;
 
-
 import com.dyc.framework.common.exception.BizException;
 import com.dyc.framework.common.response.Response;
 import com.dyc.xiaohashu.auth.enums.ResponseCodeEnum;
@@ -59,6 +58,24 @@ public class GlobalExceptionHandler {
 
         // 错误信息
         String errorMessage = sb.toString();
+
+        log.warn("{} request error, errorCode: {}, errorMessage: {}", request.getRequestURI(), errorCode, errorMessage);
+
+        return Response.fail(errorCode, errorMessage);
+    }
+
+    /**
+     * 捕获 guava 参数校验异常
+     * @return
+     */
+    @ExceptionHandler({ IllegalArgumentException.class })
+    @ResponseBody
+    public Response<Object> handleIllegalArgumentException(HttpServletRequest request, IllegalArgumentException e) {
+        // 参数错误异常码
+        String errorCode = ResponseCodeEnum.PARAM_NOT_VALID.getErrorCode();
+
+        // 错误信息
+        String errorMessage = e.getMessage();
 
         log.warn("{} request error, errorCode: {}, errorMessage: {}", request.getRequestURI(), errorCode, errorMessage);
 

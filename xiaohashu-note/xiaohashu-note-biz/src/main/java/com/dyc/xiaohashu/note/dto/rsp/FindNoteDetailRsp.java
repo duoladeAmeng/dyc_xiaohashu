@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -14,26 +16,45 @@ import java.util.List;
 public class FindNoteDetailRsp {
 
     private Long id;
+
     private Integer type;
+
     private String title;
+
     private String content;
+
     private List<String> imgUris;
 
-    private List<FindTopicRsp> topics;
+    private Long topicId;
+
+    private String topicName;
 
     private Long creatorId;
+
     private String creatorName;
+
     private String avatar;
+
     private String videoUri;
 
-    private String updateTime;
+    /**
+     * 编辑时间
+     */
+    private LocalDateTime updateTime;
 
+    /**
+     * 是否可见
+     */
     private Integer visible;
 
-    private String likeTotal;
+    /**
+     * 当前登录用户是否点赞了
+     */
+    private Integer isLiked;
 
-    private String collectTotal;
-
-    private String commentTotal;
+    /**
+     * 当前登录用户是否收藏了
+     */
+    private Integer isCollected;
 
 }

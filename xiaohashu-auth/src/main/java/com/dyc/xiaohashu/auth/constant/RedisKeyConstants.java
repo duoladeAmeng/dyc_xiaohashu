@@ -1,6 +1,5 @@
 package com.dyc.xiaohashu.auth.constant;
 
-
 public class RedisKeyConstants {
 
     /**

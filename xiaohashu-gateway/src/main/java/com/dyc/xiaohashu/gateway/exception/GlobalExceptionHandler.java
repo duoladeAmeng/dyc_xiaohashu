@@ -3,9 +3,9 @@ package com.dyc.xiaohashu.gateway.exception;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.NotPermissionException;
 import cn.dev33.satoken.exception.SaTokenException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.dyc.framework.common.response.Response;
 import com.dyc.xiaohashu.gateway.enums.ResponseCodeEnum;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
@@ -14,13 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
 public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
+
     @Resource
     private ObjectMapper objectMapper;
 
@@ -62,5 +62,4 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
             }
         }));
     }
-
 }

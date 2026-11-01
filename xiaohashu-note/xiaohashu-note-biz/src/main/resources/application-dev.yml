@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver # 指定数据库驱动类
     # 数据库连接信息
-    url: jdbc:mysql://localhost:3306/xiaohashu?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/xiaohashu?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root # 数据库用户名
     password: 1234
     type: com.alibaba.druid.pool.DruidDataSource
@@ -58,7 +58,7 @@ spring:
       server-addr: 127.0.0.1:8848
 logging:
   level:
-    com.quanxiaoha.xiaohashu.note.biz.domain.mapper: debug
+    com.dyc.xiaohashu.note.domain.mapper: debug
 rocketmq:
   name-server: 127.0.0.1:9876 # name server 地址
   producer:

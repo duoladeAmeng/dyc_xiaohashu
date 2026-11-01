@@ -1,7 +1,7 @@
 package com.dyc.xiaohashu.user.constant;
 
-
 public interface ApiConstants {
+
     /**
      * 服务名称
      */

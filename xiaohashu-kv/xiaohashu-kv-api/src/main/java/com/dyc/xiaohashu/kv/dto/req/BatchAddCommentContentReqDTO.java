@@ -9,12 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * @author: 犬小哈
- * @date: 2024/4/7 15:17
- * @version: v1.0.0
- * @description: 批量新增评论内容
- **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

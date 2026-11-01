@@ -2,6 +2,8 @@ package com.dyc.xiaohashu.oss.biz.factory;
 
 import com.dyc.xiaohashu.oss.biz.strategy.FileStrategy;
 import com.dyc.xiaohashu.oss.biz.strategy.impl.AliyunOSSFileStrategy;
+import com.dyc.xiaohashu.oss.biz.strategy.impl.MinioFileStrategy;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +19,12 @@ public class FileStrategyFactory {
     @Bean
     @RefreshScope
     public FileStrategy getFileStrategy() {
-        if (strategyType.equals("aliyun")) {
+        if (StringUtils.equals(strategyType, "minio")) {
+            return new MinioFileStrategy();
+        } else if (StringUtils.equals(strategyType, "aliyun")) {
             return new AliyunOSSFileStrategy();
         }
+
         throw new IllegalArgumentException("不可用的存储类型");
     }
 

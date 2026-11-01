@@ -5,10 +5,9 @@ import com.dyc.xiaohashu.user.api.UserFeignApi;
 import com.dyc.xiaohashu.user.dto.req.FindUserByPhoneReqDTO;
 import com.dyc.xiaohashu.user.dto.req.RegisterUserReqDTO;
 import com.dyc.xiaohashu.user.dto.req.UpdateUserPasswordReqDTO;
-import com.dyc.xiaohashu.user.dto.resp.FindUserByPhoneRspDTO;
+import com.dyc.xiaohashu.user.dto.rsp.FindUserByPhoneRspDTO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class UserRpcService {

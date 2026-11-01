@@ -13,9 +13,15 @@ import java.time.LocalDateTime;
 @Builder
 public class UserRoleDO {
     private Long id;
+
     private Long userId;
+
     private Long roleId;
+
     private LocalDateTime createTime;
+
     private LocalDateTime updateTime;
+
     private Boolean isDeleted;
+
 }

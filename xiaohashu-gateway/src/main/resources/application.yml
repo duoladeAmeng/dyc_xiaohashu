@@ -32,6 +32,12 @@ spring:
             - Path=/oss/**
           filters:
             - StripPrefix=1
+        - id: user-relation
+          uri: lb://xiaohashu-user-relation
+          predicates:
+            - Path=/relation/**
+          filters:
+            - StripPrefix=1
 sa-token:
   # token 名称（同时也是 cookie 名称）
   token-name: Authorization

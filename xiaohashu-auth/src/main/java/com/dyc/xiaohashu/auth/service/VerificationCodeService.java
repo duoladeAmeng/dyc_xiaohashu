@@ -1,25 +1,15 @@
 package com.dyc.xiaohashu.auth.service;
 
-import com.dyc.framework.common.exception.BizException;
+import com.dyc.framework.common.response.Response;
+import com.dyc.xiaohashu.auth.dto.req.SendCodeReq;
 
-/**
- * 验证码服务接口
- */
 public interface VerificationCodeService {
 
     /**
-     * 发送验证码
+     * 发送短信验证码
      *
-     * @param phone 手机号
+     * @param sendCodeReq
+     * @return
      */
-    void sendCode(String phone);
-
-    /**
-     * 校验验证码
-     *
-     * @param phone 手机号
-     * @param code  验证码
-     * @throws BizException 验证码过期或错误时抛出异常
-     */
-    void verifyCode(String phone, String code);
+    Response<?> send(SendCodeReq sendCodeReq);
 }

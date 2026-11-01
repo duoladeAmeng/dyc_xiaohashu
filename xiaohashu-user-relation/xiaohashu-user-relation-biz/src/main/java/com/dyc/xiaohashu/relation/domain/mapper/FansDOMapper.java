@@ -1,6 +1,6 @@
 package com.dyc.xiaohashu.relation.domain.mapper;
 
-import com.quanxiaoha.xiaohashu.user.relation.biz.domain.dataobject.FansDO;
+import com.dyc.xiaohashu.relation.domain.dataobject.FansDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

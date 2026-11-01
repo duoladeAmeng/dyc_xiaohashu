@@ -1,6 +1,5 @@
 package com.dyc.xiaohashu.auth.enums;
 
-
 import com.dyc.framework.common.exception.BaseExceptionInterface;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ResponseCodeEnum implements BaseExceptionInterface {
+
     // ----------- 通用异常状态码 -----------
     SYSTEM_ERROR("AUTH-10000", "出错啦，后台小哥正在努力修复中..."),
     PARAM_NOT_VALID("AUTH-10001", "参数错误"),
@@ -19,8 +19,7 @@ public enum ResponseCodeEnum implements BaseExceptionInterface {
     USER_NOT_FOUND("AUTH-20003", "该用户不存在"),
     PHONE_OR_PASSWORD_ERROR("AUTH-20004", "手机号或密码错误"),
     LOGIN_FAIL("AUTH-20005", "登录失败"),
-    VERIFICATION_CODE_EXPIRED("AUTH-20006", "验证码过期");
-
+    ;
 
     // 异常码
     private final String errorCode;
@@ -28,4 +27,3 @@ public enum ResponseCodeEnum implements BaseExceptionInterface {
     private final String errorMessage;
 
 }
-

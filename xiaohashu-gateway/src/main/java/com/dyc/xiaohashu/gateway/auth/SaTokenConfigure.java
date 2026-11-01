@@ -4,54 +4,18 @@ import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.NotPermissionException;
 import cn.dev33.satoken.exception.NotRoleException;
+import cn.dev33.satoken.exception.SaTokenException;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.web.server.WebFilter;
 
 @Configuration
 @Slf4j
 public class SaTokenConfigure {
-
-    private static final String TOKEN_HEADER_NAME = "Authorization";
-
-    private static final String TOKEN_HEADER_VALUE_PREFIX = "Bearer ";
-
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public WebFilter authorizationHeaderNormalizeFilter() {
-        return (exchange, chain) -> {
-            String authorization = exchange.getRequest().getHeaders().getFirst(TOKEN_HEADER_NAME);
-            if (authorization == null || authorization.isBlank()) {
-                return chain.filter(exchange);
-            }
-
-            String normalizedAuthorization = authorization.trim();
-            if (!normalizedAuthorization.regionMatches(true, 0, TOKEN_HEADER_VALUE_PREFIX, 0, TOKEN_HEADER_VALUE_PREFIX.length())
-                    && !normalizedAuthorization.contains(" ")) {
-                normalizedAuthorization = TOKEN_HEADER_VALUE_PREFIX + normalizedAuthorization;
-            }
-
-            if (authorization.equals(normalizedAuthorization)) {
-                return chain.filter(exchange);
-            }
-
-            String finalNormalizedAuthorization = normalizedAuthorization;
-            ServerHttpRequest request = exchange.getRequest()
-                    .mutate()
-                    .headers(headers -> headers.set(TOKEN_HEADER_NAME, finalNormalizedAuthorization))
-                    .build();
-
-            return chain.filter(exchange.mutate().request(request).build());
-        };
-    }
-
     // 注册 Sa-Token全局过滤器
     @Bean
     public SaReactorFilter getSaReactorFilter() {
@@ -65,22 +29,7 @@ public class SaTokenConfigure {
                     SaRouter.match("/**") // 拦截所有路由
                             .notMatch("/auth/login") // 排除登录接口
                             .notMatch("/auth/verification/code/send") // 排除验证码发送接口
-                            .notMatch("/doc.html")
-                            .notMatch("/webjars/**")
-                            .notMatch("/favicon.ico")
-                            .notMatch("/v3/api-docs/**")
-                            .notMatch("/*/v3/api-docs/**")
-                            .notMatch("/*/doc.html")
-                            .notMatch("/*/webjars/**")
-                            .notMatch("/note/channel/list") // 排除获取频道接口
-                            .notMatch("/note/discover/note/list") // 发现页-查询笔记列表
-                            .notMatch("/note/profile/note/list") // 个人主页-查询笔记列表
-                            .notMatch("/note/note/detail") // 查询笔记详情
-                            .notMatch("/note/note/isLikedAndCollectedData")
-                            .notMatch("/comment/comment/list") // 查询评论分页数据
-                            .notMatch("/comment/comment/child/list") // 查询评论分页数据
-                            .notMatch("/user/user/profile") // 查询评论分页数据
-                            .notMatch("/search/search/note") // 笔记搜索
+                            .notMatch("/user/user/profile") // 排除用户主页查看
                             .check(r -> StpUtil.checkLogin()) // 校验是否登录
                     ;
 

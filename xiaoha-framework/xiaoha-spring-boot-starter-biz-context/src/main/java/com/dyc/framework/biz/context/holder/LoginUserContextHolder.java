@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-
 public class LoginUserContextHolder {
 
     // 初始化一个 ThreadLocal 变量

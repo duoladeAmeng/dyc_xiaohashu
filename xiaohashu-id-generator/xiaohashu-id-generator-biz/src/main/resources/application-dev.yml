@@ -12,35 +12,9 @@ spring:
 
 server:
   port: 8085
-
-distributed-id:
-  namespace: xiaohashu
-  stable-instance: false
-  jdbc:
-    initialize-schema: true
-  snowflake:
-    enabled: true
-    epoch: 2019-12-24T16:00:00Z
-    timestamp-bit: 41
-    machine-bit: 10
-    sequence-bit: 12
-    sequence-reset-threshold: 2047
-    clock-sync: true
-    guarder-initial-delay: 1m
-    guarder-delay: 1m
-    safe-guard-duration: 5m
-    clock-spin-threshold: 1
-    clock-broken-threshold: 500
-  segment:
-    enabled: true
-    name: segment
-    step: 10000
-    ttl-seconds: 9223372036854775807
-  segment-chain:
-    enabled: true
-    name: segment-chain
-    step: 10000
-    ttl-seconds: 9223372036854775807
-    safe-distance: 2
-    prefetch-period: 1s
-    worker-core-pool-size: 4
+  tomcat:
+    threads:
+          max: 400
+          min-spare: 50
+    accept-count: 500
+    max-connections: 10000

@@ -1,6 +1,5 @@
 package com.dyc.xiaohashu.relation.exception;
 
-
 import com.dyc.framework.common.exception.BizException;
 import com.dyc.framework.common.response.Response;
 import com.dyc.xiaohashu.relation.enums.ResponseCodeEnum;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Optional;
-
 
 @ControllerAdvice
 @Slf4j
@@ -94,6 +92,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Response<Object> handleOtherException(HttpServletRequest request, Exception e) {
         log.error("{} request error, ", request.getRequestURI(), e);
-        return Response.fail(ResponseCodeEnum.SYSTEM_ERROR.toString());
+        return Response.fail(ResponseCodeEnum.SYSTEM_ERROR);
     }
 }

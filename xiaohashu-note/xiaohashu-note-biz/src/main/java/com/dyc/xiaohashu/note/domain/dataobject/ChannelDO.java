@@ -13,8 +13,12 @@ import java.time.LocalDateTime;
 @Builder
 public class ChannelDO {
     private Long id;
+
     private String name;
+
     private LocalDateTime createTime;
+
     private LocalDateTime updateTime;
+
     private Boolean isDeleted;
 }

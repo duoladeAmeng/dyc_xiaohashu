@@ -1,15 +1,8 @@
 package com.dyc.xiaohashu.note.service;
 
-
 import com.dyc.framework.common.response.Response;
-import com.dyc.xiaohashu.note.dto.req.DeleteNoteReq;
-import com.dyc.xiaohashu.note.dto.req.FindNoteDetailReq;
-import com.dyc.xiaohashu.note.dto.req.PublishNoteReq;
-import com.dyc.xiaohashu.note.dto.req.TopNoteReq;
-import com.dyc.xiaohashu.note.dto.req.UpdateNoteReq;
-import com.dyc.xiaohashu.note.dto.req.UpdateNoteVisibleOnlyMeReq;
-import com.dyc.xiaohashu.note.dto.rsp.FindNoteDetailRsp;
-
+import com.dyc.xiaohashu.note.dto.req.*;
+import com.dyc.xiaohashu.note.dto.rsp.*;
 
 public interface NoteService {
 
@@ -22,9 +15,10 @@ public interface NoteService {
 
     /**
      * 笔记详情
+     * @param findNoteDetailReq
+     * @return
      */
     Response<FindNoteDetailRsp> findNoteDetail(FindNoteDetailReq findNoteDetailReq);
-
 
     /**
      * 笔记更新
@@ -59,40 +53,47 @@ public interface NoteService {
      * @return
      */
     Response<?> topNote(TopNoteReq topNoteReq);
-//
-//    /**
-//     * 点赞笔记
-//     * @param likeNoteReqVO
-//     * @return
-//     */
-//    Response<?> likeNote(LikeNoteReqVO likeNoteReqVO);
-//
-//    /**
-//     * 取消点赞笔记
-//     * @param unlikeNoteReqVO
-//     * @return
-//     */
-//    Response<?> unlikeNote(UnlikeNoteReqVO unlikeNoteReqVO);
-//
-//    /**
-//     * 收藏笔记
-//     * @param collectNoteReqVO
-//     * @return
-//     */
-//    Response<?> collectNote(CollectNoteReqVO collectNoteReqVO);
-//
-//    /**
-//     * 取消收藏笔记
-//     * @param unCollectNoteReqVO
-//     * @return
-//     */
-//    Response<?> unCollectNote(UnCollectNoteReqVO unCollectNoteReqVO);
-//
-//    /**
-//     * 获取是否点赞、收藏数据
-//     * @param findNoteIsLikedAndCollectedReqVO
-//     * @return
-//     */
-//    Response<FindNoteIsLikedAndCollectedRspVO> isLikedAndCollectedData(FindNoteIsLikedAndCollectedReqVO findNoteIsLikedAndCollectedReqVO);
+
+    /**
+     * 点赞笔记
+     * @param likeNoteReq
+     * @return
+     */
+    Response<?> likeNote(LikeNoteReq likeNoteReq);
+
+    /**
+     * 取消点赞笔记
+     * @param unlikeNoteReq
+     * @return
+     */
+    Response<?> unlikeNote(UnlikeNoteReq unlikeNoteReq);
+
+    /**
+     * 收藏笔记
+     * @param collectNoteReq
+     * @return
+     */
+    Response<?> collectNote(CollectNoteReq collectNoteReq);
+
+    /**
+     * 取消收藏笔记
+     * @param unCollectNoteReq
+     * @return
+     */
+    Response<?> unCollectNote(UnCollectNoteReq unCollectNoteReq);
+
+    /**
+     * 获取是否点赞、收藏数据
+     * @param findNoteIsLikedAndCollectedReq
+     * @return
+     */
+    Response<FindNoteIsLikedAndCollectedRsp> isLikedAndCollectedData(FindNoteIsLikedAndCollectedReq findNoteIsLikedAndCollectedReq);
+
+    /**
+     * 用户主页 - 查询已发布的笔记列表
+     * @param findPublishedNoteListReq
+     * @return
+     */
+    Response<FindPublishedNoteListRsp> findPublishedNoteList(FindPublishedNoteListReq findPublishedNoteListReq);
 
 }

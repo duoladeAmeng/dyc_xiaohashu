@@ -1,25 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-
     <!-- 指定父项目 -->
     <parent>
         <groupId>com.dyc</groupId>
         <artifactId>xiaohashu</artifactId>
         <version>${revision}</version>
     </parent>
-
-<!--    指定打包方式-->
+    <!--    指定打包方式-->
     <packaging>jar</packaging>
-
-
     <artifactId>xiaohashu-auth</artifactId>
     <name>xiaohashu-auth</name>
     <description>xiaohashu-auth</description>
-
-
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,8 +19,7 @@
         <spring-boot.version>3.0.2</spring-boot.version>
     </properties>
     <dependencies>
-
-<!--        web依赖-->
+        <!--        web依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -38,35 +29,30 @@
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
         </dependency>
-<!--测试依赖-->
+        <!--测试依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-<!--       通用模块 -->
+        <!--       通用模块 -->
         <dependency>
             <groupId>com.dyc</groupId>
             <artifactId>xiaoha-common</artifactId>
         </dependency>
-
-<!--        日志切面starter-->
+        <!--        日志切面starter-->
         <dependency>
             <groupId>com.dyc</groupId>
             <artifactId>xiaoha-spring-boot-starter-biz-operationlog</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-3-starter</artifactId>
@@ -95,13 +81,11 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
         <!-- 密码加密 -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
         </dependency>
-
         <!-- satoken依赖-->
         <dependency>
             <groupId>cn.dev33</groupId>
@@ -111,22 +95,32 @@
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-redis-jackson</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.dyc.xiaohashu.user</groupId>
             <artifactId>xiaohashu-user-api</artifactId>
         </dependency>
-
         <!-- 上下文组件 -->
         <dependency>
             <groupId>com.dyc</groupId>
             <artifactId>xiaoha-spring-boot-starter-biz-context</artifactId>
         </dependency>
-
-
-
+        <dependency>
+            <groupId>com.dyc.framework.jackson</groupId>
+            <artifactId>xiaoha-spring-boot-starter-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>dysmsapi20170525</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -156,14 +150,11 @@
                     </execution>
                 </executions>
             </plugin>
-
-<!--            代码生成器插件-->
+            <!--            代码生成器插件-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
-
 </project>

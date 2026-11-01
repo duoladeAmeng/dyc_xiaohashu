@@ -2,27 +2,27 @@ package com.dyc.xiaohashu.gateway.auth;
 
 import cn.dev33.satoken.stp.StpInterface;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import com.dyc.xiaohashu.gateway.constant.RedisKeyConstants;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
+import com.dyc.xiaohashu.gateway.constant.RedisKeyConstants;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
 
 @Component
 @Slf4j
 public class StpInterfaceImpl implements StpInterface {
 
     @Resource
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
     @Resource
     private ObjectMapper objectMapper;
 
@@ -42,9 +42,9 @@ public class StpInterfaceImpl implements StpInterface {
         String userRolesKey = RedisKeyConstants.buildUserRoleKey(Long.valueOf(loginId.toString()));
 
         // 根据用户 ID ，从 Redis 中获取该用户的角色集合
-        String useRolesValue = stringRedisTemplate.opsForValue().get(userRolesKey);
+        String useRolesValue = redisTemplate.opsForValue().get(userRolesKey);
 
-        if (StrUtil.isBlank(useRolesValue)) {
+        if (StringUtils.isBlank(useRolesValue)) {
             return null;
         }
 
@@ -59,10 +59,10 @@ public class StpInterfaceImpl implements StpInterface {
                     .toList();
 
             // 通过 key 集合批量查询权限，提升查询性能。
-            List<String> rolePermissionsValues = stringRedisTemplate.opsForValue().multiGet(rolePermissionsKeys);
+            List<String> rolePermissionsValues = redisTemplate.opsForValue().multiGet(rolePermissionsKeys);
 
             if (CollUtil.isNotEmpty(rolePermissionsValues)) {
-                List<String> permissions = new ArrayList();
+                List<String> permissions = Lists.newArrayList();
 
                 // 遍历所有角色的权限集合，统一添加到 permissions 集合中
                 rolePermissionsValues.forEach(jsonValue -> {
@@ -98,9 +98,9 @@ public class StpInterfaceImpl implements StpInterface {
         String userRolesKey = RedisKeyConstants.buildUserRoleKey(Long.valueOf(loginId.toString()));
 
         // 根据用户 ID ，从 Redis 中获取该用户的角色集合
-        String useRolesValue = stringRedisTemplate.opsForValue().get(userRolesKey);
+        String useRolesValue = redisTemplate.opsForValue().get(userRolesKey);
 
-        if (StrUtil.isBlank(useRolesValue)) {
+        if (StringUtils.isBlank(useRolesValue)) {
             return null;
         }
 

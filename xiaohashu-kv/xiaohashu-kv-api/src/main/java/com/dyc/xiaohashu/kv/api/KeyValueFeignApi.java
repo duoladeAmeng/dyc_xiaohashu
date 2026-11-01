@@ -1,6 +1,5 @@
 package com.dyc.xiaohashu.kv.api;
 
-
 import com.dyc.framework.common.response.Response;
 import com.dyc.xiaohashu.kv.constant.ApiConstants;
 import com.dyc.xiaohashu.kv.dto.req.*;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-
 
 @FeignClient(name = ApiConstants.SERVICE_NAME)
 public interface KeyValueFeignApi {

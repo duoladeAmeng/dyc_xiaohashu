@@ -1,82 +1,119 @@
 package com.dyc.framework.common.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public final class JsonUtils {
+public class JsonUtils {
 
-    private static ObjectMapper objectMapper = createDefaultObjectMapper();
+    private static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private JsonUtils() {
+    static {
+        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        OBJECT_MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        OBJECT_MAPPER.registerModules(new JavaTimeModule()); // 解决 LocalDateTime 的序列化问题
     }
 
-    public static void init(ObjectMapper mapper) {
-        objectMapper = mapper;
+    /**
+     * 初始化：统一使用 Spring Boot 个性化配置的 ObjectMapper
+     *
+     * @param objectMapper
+     */
+    public static void init(ObjectMapper objectMapper) {
+        OBJECT_MAPPER = objectMapper;
     }
 
+    /**
+     *  将对象转换为 JSON 字符串
+     * @param obj
+     * @return
+     */
+    @SneakyThrows
     public static String toJsonString(Object obj) {
-        try {
-            return objectMapper.writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("对象转 JSON 失败", e);
-        }
+       return OBJECT_MAPPER.writeValueAsString(obj);
     }
 
+    /**
+     * 将 JSON 字符串转换为对象
+     *
+     * @param jsonStr
+     * @param clazz
+     * @return
+     * @param <T>
+     */
+    @SneakyThrows
     public static <T> T parseObject(String jsonStr, Class<T> clazz) {
-        if (jsonStr == null || jsonStr.isBlank()) {
+        if (StringUtils.isBlank(jsonStr)) {
             return null;
         }
-        try {
-            return objectMapper.readValue(jsonStr, clazz);
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("JSON 转对象失败", e);
-        }
+
+        return OBJECT_MAPPER.readValue(jsonStr, clazz);
     }
 
-    public static <K, V> Map<K, V> parseMap(String jsonStr, Class<K> keyClass, Class<V> valueClass) {
-        try {
-            return objectMapper.readValue(jsonStr,
-                    objectMapper.getTypeFactory().constructMapType(Map.class, keyClass, valueClass));
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("JSON 转 Map 失败", e);
-        }
+    /**
+     * 将 JSON 字符串转换为 Map
+     * @param jsonStr
+     * @param keyClass
+     * @param valueClass
+     * @return
+     * @param <K>
+     * @param <V>
+     * @throws Exception
+     */
+    public static <K, V> Map<K, V> parseMap(String jsonStr, Class<K> keyClass, Class<V> valueClass) throws Exception {
+        // 创建 TypeReference，指定泛型类型
+        TypeReference<Map<K, V>> typeRef = new TypeReference<Map<K, V>>() {
+        };
+
+        // 将 JSON 字符串转换为 Map
+        return OBJECT_MAPPER.readValue(jsonStr, OBJECT_MAPPER.getTypeFactory().constructMapType(Map.class, keyClass, valueClass));
     }
 
-    public static <T> List<T> parseList(String jsonStr, Class<T> clazz) {
-        try {
-            return objectMapper.readValue(jsonStr,
-                    objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("JSON 转 List 失败", e);
-        }
+    /**
+     * 将 JSON 字符串解析为指定类型的 List 对象
+     *
+     * @param jsonStr
+     * @param clazz
+     * @return
+     * @param <T>
+     * @throws Exception
+     */
+    public static <T> List<T> parseList(String jsonStr, Class<T> clazz) throws Exception {
+        // 使用 TypeReference 指定 List<T> 的泛型类型
+        return OBJECT_MAPPER.readValue(jsonStr, new TypeReference<List<T>>() {
+            @Override
+            public CollectionType getType() {
+                return OBJECT_MAPPER.getTypeFactory().constructCollectionType(List.class, clazz);
+            }
+        });
     }
 
-    public static <T> Set<T> parseSet(String jsonStr, Class<T> clazz) {
-        try {
-            return objectMapper.readValue(jsonStr, new TypeReference<>() {
-                @Override
-                public com.fasterxml.jackson.databind.type.CollectionType getType() {
-                    return objectMapper.getTypeFactory().constructCollectionType(Set.class, clazz);
-                }
-            });
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("JSON 转 Set 失败", e);
-        }
+    /**
+     * 将 JSON 字符串解析为指定类型的 Set 对象
+     *
+     * @param jsonStr
+     * @param clazz
+     * @return
+     * @param <T>
+     * @throws Exception
+     */
+    public static <T> Set<T> parseSet(String jsonStr, Class<T> clazz) throws Exception {
+        // 使用 TypeReference 指定 Set<T> 的泛型类型
+        return OBJECT_MAPPER.readValue(jsonStr, new TypeReference<>() {
+            @Override
+            public CollectionType getType() {
+                return OBJECT_MAPPER.getTypeFactory().constructCollectionType(Set.class, clazz);
+            }
+        });
     }
 
-    private static ObjectMapper createDefaultObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
-    }
 }

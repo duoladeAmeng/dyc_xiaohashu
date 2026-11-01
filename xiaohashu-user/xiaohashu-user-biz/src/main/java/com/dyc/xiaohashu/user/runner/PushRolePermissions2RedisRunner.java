@@ -1,5 +1,9 @@
 package com.dyc.xiaohashu.user.runner;
 
+import cn.hutool.core.collection.CollUtil;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.dyc.framework.common.util.JsonUtils;
 import com.dyc.xiaohashu.user.constant.RedisKeyConstants;
 import com.dyc.xiaohashu.user.domain.dataobject.PermissionDO;
 import com.dyc.xiaohashu.user.domain.dataobject.RoleDO;
@@ -7,18 +11,13 @@ import com.dyc.xiaohashu.user.domain.dataobject.RolePermissionDO;
 import com.dyc.xiaohashu.user.domain.mapper.PermissionDOMapper;
 import com.dyc.xiaohashu.user.domain.mapper.RoleDOMapper;
 import com.dyc.xiaohashu.user.domain.mapper.RolePermissionDOMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -29,11 +28,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class PushRolePermissions2RedisRunner implements ApplicationRunner {
 
-    private static final String PUSH_PERMISSION_FLAG = "push.permission.flag";
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-
     @Resource
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
     @Resource
     private RoleDOMapper roleDOMapper;
     @Resource
@@ -41,66 +37,80 @@ public class PushRolePermissions2RedisRunner implements ApplicationRunner {
     @Resource
     private RolePermissionDOMapper rolePermissionDOMapper;
 
+    // 权限同步标记 Key
+    private static final String PUSH_PERMISSION_FLAG = "push.permission.flag";
+
     @Override
     public void run(ApplicationArguments args) {
+        log.info("==> 服务启动，开始同步角色权限数据到 Redis 中...");
+
         try {
-            Boolean canPush = stringRedisTemplate.opsForValue().setIfAbsent(PUSH_PERMISSION_FLAG, "1", 1, TimeUnit.DAYS);
-            if (!Boolean.TRUE.equals(canPush)) {
+            // 是否能够同步数据: 原子操作，只有在键 PUSH_PERMISSION_FLAG 不存在时，才会设置该键的值为 "1"，并设置过期时间为 1 天
+            boolean canPushed = redisTemplate.opsForValue().setIfAbsent(PUSH_PERMISSION_FLAG, "1", 1, TimeUnit.DAYS);
+
+            // 如果无法同步权限数据
+            if (!canPushed) {
+                log.warn("==> 角色权限数据已经同步至 Redis 中，不再同步...");
                 return;
             }
 
-            List<RoleDO> roles = roleDOMapper.selectEnabledList();
-            if (CollectionUtils.isEmpty(roles)) {
-                return;
-            }
+            // 查询出所有角色
+            List<RoleDO> roleDOS = roleDOMapper.selectEnabledList();
 
-            List<Long> roleIds = roles.stream().map(RoleDO::getId).toList();
-            List<RolePermissionDO> rolePermissions = rolePermissionDOMapper.selectByRoleIds(roleIds);
-            if (CollectionUtils.isEmpty(rolePermissions)) {
-                return;
-            }
+            if (CollUtil.isNotEmpty(roleDOS)) {
+                // 拿到所有角色的 ID
+                List<Long> roleIds = roleDOS.stream().map(RoleDO::getId).toList();
 
-            Map<Long, List<Long>> roleIdPermissionIdsMap = rolePermissions.stream()
-                    .collect(Collectors.groupingBy(RolePermissionDO::getRoleId,
-                            Collectors.mapping(RolePermissionDO::getPermissionId, Collectors.toList())));
+                // 根据角色 ID, 批量查询出所有角色对应的权限
+                List<RolePermissionDO> rolePermissionDOS = rolePermissionDOMapper.selectByRoleIds(roleIds);
+                // 按角色 ID 分组, 每个角色 ID 对应多个权限 ID
+                Map<Long, List<Long>> roleIdPermissionIdsMap = rolePermissionDOS.stream().collect(
+                        Collectors.groupingBy(RolePermissionDO::getRoleId,
+                                Collectors.mapping(RolePermissionDO::getPermissionId, Collectors.toList()))
+                );
 
-            List<PermissionDO> permissions = permissionDOMapper.selectAppEnabledList();
-            if (CollectionUtils.isEmpty(permissions)) {
-                return;
-            }
+                // 查询 APP 端所有被启用的权限
+                List<PermissionDO> permissionDOS = permissionDOMapper.selectAppEnabledList();
+                // 权限 ID - 权限 DO
+                Map<Long, PermissionDO> permissionIdDOMap = permissionDOS.stream().collect(
+                        Collectors.toMap(PermissionDO::getId, permissionDO -> permissionDO)
+                );
 
-            Map<Long, PermissionDO> permissionMap = permissions.stream()
-                    .collect(Collectors.toMap(PermissionDO::getId, permission -> permission));
-            Map<String, List<String>> roleKeyPermissionsMap = new HashMap<>();
+                // 组织 角色-权限 关系
+                Map<String, List<String>> roleKeyPermissionsMap = Maps.newHashMap();
 
-            for (RoleDO role : roles) {
-                List<Long> permissionIds = roleIdPermissionIdsMap.get(role.getId());
-                if (CollectionUtils.isEmpty(permissionIds)) {
-                    continue;
-                }
-                List<String> permissionKeys = new ArrayList<>();
-                for (Long permissionId : permissionIds) {
-                    PermissionDO permission = permissionMap.get(permissionId);
-                    if (Objects.nonNull(permission)) {
-                        permissionKeys.add(permission.getPermissionKey());
+                // 循环所有角色
+                roleDOS.forEach(roleDO -> {
+                    // 当前角色 ID
+                    Long roleId = roleDO.getId();
+                    // 当前角色 roleKey
+                    String roleKey = roleDO.getRoleKey();
+                    // 当前角色 ID 对应的权限 ID 集合
+                    List<Long> permissionIds = roleIdPermissionIdsMap.get(roleId);
+                    if (CollUtil.isNotEmpty(permissionIds)) {
+                        List<String> permissionKeys = Lists.newArrayList();
+                        permissionIds.forEach(permissionId -> {
+                            // 根据权限 ID 获取具体的权限 DO 对象
+                            PermissionDO permissionDO = permissionIdDOMap.get(permissionId);
+                            if (Objects.nonNull(permissionDO)) {
+                                permissionKeys.add(permissionDO.getPermissionKey());
+                            }
+                        });
+                        roleKeyPermissionsMap.put(roleKey, permissionKeys);
                     }
-                }
-                roleKeyPermissionsMap.put(role.getRoleKey(), permissionKeys);
+                });
+
+                // 同步至 Redis 中，方便后续网关查询 Redis, 用于鉴权
+                roleKeyPermissionsMap.forEach((roleKey, permissions) -> {
+                    String key = RedisKeyConstants.buildRolePermissionsKey(roleKey);
+                    redisTemplate.opsForValue().set(key, JsonUtils.toJsonString(permissions));
+                });
             }
 
-            roleKeyPermissionsMap.forEach((roleKey, permissionKeys) ->
-                    stringRedisTemplate.opsForValue().set(RedisKeyConstants.buildRolePermissionsKey(roleKey),
-                            toJson(permissionKeys)));
+            log.info("==> 服务启动，成功同步角色权限数据到 Redis 中...");
         } catch (Exception e) {
-            log.error("同步角色权限到 Redis 失败", e);
+            log.error("==> 同步角色权限数据到 Redis 中失败: ", e);
         }
-    }
 
-    private String toJson(Object value) {
-        try {
-            return OBJECT_MAPPER.writeValueAsString(value);
-        } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("对象转 JSON 失败", e);
-        }
     }
 }

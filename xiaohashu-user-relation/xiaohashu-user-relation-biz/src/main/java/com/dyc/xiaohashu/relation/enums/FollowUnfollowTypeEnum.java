@@ -3,7 +3,6 @@ package com.dyc.xiaohashu.relation.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @Getter
 @AllArgsConstructor
 public enum FollowUnfollowTypeEnum {

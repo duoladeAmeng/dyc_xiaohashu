@@ -1,5 +1,6 @@
 package com.dyc.xiaohashu.auth.dto.req;
 
+import com.dyc.framework.common.validator.PhoneNumber;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -7,9 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @description: 用户登录（支持密码或验证码两种方式）
- **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +18,7 @@ public class UserLoginReq {
      * 手机号
      */
     @NotBlank(message = "手机号不能为空")
+    @PhoneNumber
     private String phone;
 
     /**

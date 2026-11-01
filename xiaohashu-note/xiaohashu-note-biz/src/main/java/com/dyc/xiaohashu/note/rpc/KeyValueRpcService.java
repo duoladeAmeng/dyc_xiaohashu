@@ -1,6 +1,5 @@
 package com.dyc.xiaohashu.note.rpc;
 
-
 import com.dyc.framework.common.response.Response;
 import com.dyc.xiaohashu.kv.api.KeyValueFeignApi;
 import com.dyc.xiaohashu.kv.dto.req.AddNoteContentReqDTO;

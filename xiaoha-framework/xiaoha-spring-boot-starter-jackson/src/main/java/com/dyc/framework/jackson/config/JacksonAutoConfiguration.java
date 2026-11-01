@@ -1,6 +1,5 @@
 package com.dyc.framework.jackson.config;
 
-import com.dyc.framework.jackson.properties.JacksonProperties;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -13,46 +12,19 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.YearMonthSerializer;
+import com.dyc.framework.common.constants.DateConstants;
+import com.dyc.framework.common.util.JsonUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
-
 @AutoConfiguration
-@EnableConfigurationProperties(JacksonProperties.class)
 public class JacksonAutoConfiguration {
-    private final JacksonProperties properties;
-
-    /**
-     * DateTimeFormatter：年-月-日 时：分：秒
-     */
-    DateTimeFormatter DATE_FORMAT_Y_M_D_H_M_S ;
-
-    /**
-     * DateTimeFormatter：年-月-日
-     */
-    DateTimeFormatter DATE_FORMAT_Y_M_D ;
-
-    /**
-     * DateTimeFormatter：时：分：秒
-     */
-    DateTimeFormatter DATE_FORMAT_H_M_S;
-
-
-    public JacksonAutoConfiguration(JacksonProperties properties) {
-        this.properties = properties;
-        this.DATE_FORMAT_Y_M_D_H_M_S = DateTimeFormatter.ofPattern(properties.getDateTimePattern());
-        this.DATE_FORMAT_Y_M_D = DateTimeFormatter.ofPattern(properties.getDatePattern());
-        this.DATE_FORMAT_H_M_S = DateTimeFormatter.ofPattern(properties.getTimePattern());
-    }
-
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -71,16 +43,21 @@ public class JacksonAutoConfiguration {
         // JavaTimeModule 用于指定序列化和反序列化规则
         JavaTimeModule javaTimeModule = new JavaTimeModule();
 
-
         // 支持 LocalDateTime、LocalDate、LocalTime
-        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DATE_FORMAT_Y_M_D_H_M_S));
-        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DATE_FORMAT_Y_M_D_H_M_S));
-        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DATE_FORMAT_Y_M_D));
-        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DATE_FORMAT_Y_M_D));
-        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DATE_FORMAT_H_M_S));
-        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DATE_FORMAT_H_M_S));
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateConstants.DATE_FORMAT_Y_M_D_H_M_S));
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateConstants.DATE_FORMAT_Y_M_D_H_M_S));
+        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateConstants.DATE_FORMAT_Y_M_D));
+        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateConstants.DATE_FORMAT_Y_M_D));
+        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateConstants.DATE_FORMAT_H_M_S));
+        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateConstants.DATE_FORMAT_H_M_S));
+        // 支持 YearMonth
+        javaTimeModule.addSerializer(YearMonth.class, new YearMonthSerializer(DateConstants.DATE_FORMAT_Y_M));
+        javaTimeModule.addDeserializer(YearMonth.class, new YearMonthDeserializer(DateConstants.DATE_FORMAT_Y_M));
 
         objectMapper.registerModule(javaTimeModule);
+
+        // 初始化 JsonUtils 中的 ObjectMapper
+        JsonUtils.init(objectMapper);
 
         return objectMapper;
     }

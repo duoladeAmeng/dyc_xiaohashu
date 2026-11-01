@@ -1,6 +1,6 @@
 package com.dyc.xiaohashu.user.rpc;
 
-import com.dyc.xiaohashu.user.id.UserIdGenerator;
+import com.dyc.xiaohashu.id.generator.api.DistributedIdGeneratorFeignApi;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
@@ -8,13 +8,33 @@ import org.springframework.stereotype.Component;
 public class DistributedIdGeneratorRpcService {
 
     @Resource
-    private UserIdGenerator userIdGenerator;
+    private DistributedIdGeneratorFeignApi distributedIdGeneratorFeignApi;
 
+    /**
+     * Leaf 号段模式：小哈书 ID 业务标识
+     */
+    private static final String BIZ_TAG_XIAOHASHU_ID = "leaf-segment-xiaohashu-id";
+
+    /**
+     * Leaf 号段模式：用户 ID 业务标识
+     */
+    private static final String BIZ_TAG_USER_ID = "leaf-segment-user-id";
+
+    /**
+     * 调用分布式 ID 生成服务生成小哈书 ID
+     *
+     * @return
+     */
     public String getXiaohashuId() {
-        return userIdGenerator.nextXiaohashuId();
+        return distributedIdGeneratorFeignApi.getSegmentId(BIZ_TAG_XIAOHASHU_ID);
     }
 
+    /**
+     * 调用分布式 ID 生成服务用户 ID
+     *
+     * @return
+     */
     public String getUserId() {
-        return String.valueOf(userIdGenerator.nextUserId());
+        return distributedIdGeneratorFeignApi.getSegmentId(BIZ_TAG_USER_ID);
     }
 }
